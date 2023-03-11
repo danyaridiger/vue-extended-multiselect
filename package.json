@@ -1,6 +1,6 @@
 {
   "name": "vue-extended-multiselect",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Extended multiselect component for applications based on Vue 2 framework",
   "keywords": [
     "multiselect",
@@ -10,6 +10,10 @@
     "vue2"
   ],
   "typings": "typings/vue-extended-multiselect.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danyaridiger/vue-extended-multiselect"
+  },
   "author": "Ridiger Daniil Dmitrievich <extendedmultiselect@yandex.ru>",
   "license": "MIT",
   "scripts": {
