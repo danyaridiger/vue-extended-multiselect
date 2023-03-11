@@ -1,0 +1,42 @@
+{
+  "name": "vue-extended-multiselect",
+  "version": "0.0.1",
+  "description": "Extended multiselect component for applications based on Vue 2 framework",
+  "keywords": [
+    "multiselect",
+    "select",
+    "extended",
+    "vue",
+    "vue2"
+  ],
+  "typings": "typings/vue-extended-multiselect.d.ts",
+  "author": "Ridiger Daniil Dmitrievich <extendedmultiselect@yandex.ru>",
+  "license": "MIT",
+  "scripts": {
+    "start": "vue-cli-service serve",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "extended-click-outside": "^1.1.0",
+    "vue": "^2.6.11",
+    "vuex": "^2.5.0"
+  },
+  "devDependencies": {
+    "@testing-library/vue": "^5.8.3",
+    "@vue/cli-plugin-babel": "~4.5.19",
+    "@vue/cli-plugin-eslint": "~4.5.19",
+    "@vue/cli-plugin-unit-jest": "~4.5.19",
+    "@vue/cli-service": "~4.5.19",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.5",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "resize-observer-polyfill": "^1.5.1",
+    "sass": "^1.54.3",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
