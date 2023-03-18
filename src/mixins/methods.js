@@ -445,7 +445,7 @@ export default {
      * @method
      */
     toggleOptions() {
-      if (this.internalLoading || this.disabled) return;
+      if (this.internalLoading || this.disabled || this.dropdownDisabled) return;
 
       this.toggleAppearanceRestrictorActivate();
 
@@ -576,7 +576,7 @@ export default {
     this.chosenToggleAppearanceSide = this.toggleAppearanceSide;
 
     this.emitter.$on("extended:expand-options", () => {
-      if (this.dropdownActive === true) return;
+      if (this.dropdownActive || this.dropdownDisabled) return;
       
       this.toggleAppearanceRestrictorActivate();
       this.activeEmitter();

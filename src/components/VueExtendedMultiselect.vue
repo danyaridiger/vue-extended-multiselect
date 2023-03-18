@@ -265,7 +265,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.0.2
+ * @version 0.1.0
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
@@ -340,6 +340,16 @@ export default Vue.extend({
      * @property {boolean} disabled
      */
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Disables dropdown toggle
+     * @default false
+     * @property {boolean} dropdownDisabled
+     */
+    dropdownDisabled: {
       type: Boolean,
       default: false,
     },

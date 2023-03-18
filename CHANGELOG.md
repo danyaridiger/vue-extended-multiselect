@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.0.1**
+Current vue-extended-multiselect version: **0.1.0**
 
 ***
 
@@ -12,3 +12,10 @@ Current vue-extended-multiselect version: **0.0.1**
 
 * Adding "repository" section to package.json file.
 * Removal of excess "public" directory.
+
+### 0.1.0 (2023-03-18)
+
+* Adding "dropdownDisabled" optional prop.
+* Adding unit-test for new optional prop.
+* Adding some new css-variabled.
+* Removal of excess type from types.
