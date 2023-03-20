@@ -10,6 +10,10 @@ export const mockOptionSelection = async (wrapper) => {
   await fireEvent.click(optionElement.element);
 }
 
+export const mockOptionsLoader = async () => {
+  return await Promise.resolve(globalThis.OPTIONS);
+}
+
 export const expandOptionsList = async (wrapper) => {
   await wrapper.setData({ dropdownActive: true });
 }

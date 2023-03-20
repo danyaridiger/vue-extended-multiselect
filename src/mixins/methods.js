@@ -562,6 +562,7 @@ export default {
    * @listens extended:clean-options
    * @listens extended:create-option
    * @listens extended:increase-display
+   * @listens extended:loader-pattern-changed
    * @listens extended:search-pattern-changed
    */
   created() {
@@ -680,6 +681,20 @@ export default {
        * @property {limit} - current limit of options to be shown next
        */
       this.$emit("increase", eventData);
+    });
+
+    this.emitter.$on("extended:loader-pattern-changed", (pattern) => {
+      const eventData = this.simpleEvents 
+       ? pattern 
+       : this.createEventFields(pattern, "pattern");
+
+      /**
+       * @event pattern-changed
+       * @type {Object}
+       * @property {string} inputId - id of search field set by "id" prop
+       * @property {pattern} - pattern of internal search for available options
+       */
+      this.$emit("pattern-changed", eventData);
     });
 
     this.emitter.$on("extended:search-pattern-changed", (pattern) => {

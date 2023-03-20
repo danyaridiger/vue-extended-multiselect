@@ -1,8 +1,8 @@
 import { fireEvent } from "@testing-library/dom";
 import { mountComponent, localVueConstructor } from "../utils/mount";
 import { 
-  mockOptionSelection, 
-  expandOptionsList,
+  mockOptionSelection,
+  mockOptionsLoader,
   createNewOptionsWrapper,
 } from "../utils/utils";
 
@@ -28,6 +28,16 @@ describe("events", () => {
     );
 
     expect(wrapper.emitted()['pattern-changed'][0][0]).toEqual(globalThis.SEARCH_VALUE);
+
+    propsData.options = mockOptionsLoader;
+    wrapper = await mountComponent(VueExtendedMultiselect, true, propsData);
+
+    wrapper.vm.$data.emitter.$emit(
+      "extended:loader-pattern-changed", 
+      globalThis.SEARCH_VALUE_WITH_RESULTS,
+    );
+
+    expect(wrapper.emitted()['pattern-changed'][0][0]).toEqual(globalThis.SEARCH_VALUE_WITH_RESULTS);
   });
 
 
@@ -41,7 +51,6 @@ describe("events", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    await expandOptionsList(wrapper);
     await mockOptionSelection(wrapper);
 
     expect(wrapper.emitted().select[0][0].option.label).toEqual("First Option");
@@ -80,7 +89,6 @@ describe("events", () => {
       store,
     });
 
-    await expandOptionsList(wrapper);
     await fireEvent.mouseDown(createNewOptionsWrapper(wrapper).element);
 
     expect(wrapper.emitted()['option-created'][0][0]).toEqual(globalThis.SEARCH_VALUE);
@@ -109,7 +117,6 @@ describe("events", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    await expandOptionsList(wrapper);
     await mockOptionSelection(wrapper);
 
     expect(wrapper.emitted().close[0][0].inputId).toEqual(globalThis.INPUT_ID);

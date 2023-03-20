@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.1.0**
+Current vue-extended-multiselect version: **0.1.1**
 
 ***
 
@@ -19,3 +19,7 @@ Current vue-extended-multiselect version: **0.1.0**
 * Adding unit-test for new optional prop.
 * Adding some new css-variabled.
 * Removal of excess type from types.
+
+### 0.1.1 (2023-03-20)
+
+* Fixing bug with "pattern-changed" event with a call to the internal loader method.
