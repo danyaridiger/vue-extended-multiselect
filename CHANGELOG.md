@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.1.1**
+Current vue-extended-multiselect version: **0.1.2**
 
 ***
 

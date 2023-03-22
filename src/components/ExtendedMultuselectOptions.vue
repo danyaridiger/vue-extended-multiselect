@@ -268,15 +268,6 @@ export default Vue.extend({
     },
 
     /**
-     * Defines "height" css-property of every option element
-     * @property {number} anyOptionWrapperBlockHeight
-     */
-    anyOptionWrapperBlockHeight: {
-      type: Number,
-      required: true,
-    },
-
-    /**
      * Determines maximal limit of selected options
      * @property {number|null} maxOptionsCount
      */
@@ -408,6 +399,15 @@ export default Vue.extend({
     externalOptionsLoader: {
       type: Function,
       default: null,
+    },
+
+    /**
+     * Defines "height" css-property of every option element
+     * @property {number} anyOptionWrapperBlockHeight
+     */
+    anyOptionWrapperBlockHeight: {
+      type: [Number, String],
+      required: true,
     },
 
     /**
@@ -588,14 +588,15 @@ export default Vue.extend({
     },
 
     /**
-     * Defines styles for "padding" and "height" css-property 
+     * Defines styles for "padding" and "height" css-property
      * of every option element
      * @method
      * @returns {Object} styles
      */
     optionHeightByProps() {
+      const heightNumeric = typeof this.anyOptionWrapperBlockHeight === "number";
       let height = {
-        height: `${this.anyOptionWrapperBlockHeight}px`,
+        height: heightNumeric ? `${this.anyOptionWrapperBlockHeight}px` : `${this.anyOptionWrapperBlockHeight}`,
       };
 
       if (this.optionsPadding.length) {

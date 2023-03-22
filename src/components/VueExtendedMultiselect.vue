@@ -46,7 +46,6 @@
           :theme-type="themeType"
           :increase-display-by="increaseDisplayBy"
           :multipleBlocksLimit="multipleBlocksLimit"
-          :restricted-options-length="restrictedOptionsLength"
           :toggle-multiple-blocks-limit="toggleMultipleBlocksLimit"
           :selected-options="selectedOptions"
           :emitter="emitter"
@@ -265,7 +264,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.1.1
+ * @version 0.1.2
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
@@ -697,16 +696,6 @@ export default Vue.extend({
     },
 
     /**
-     * Defines "height" css-property for each option in options list
-     * @default 30
-     * @property {number} anyOptionWrapperBlockHeight
-     */
-    anyOptionWrapperBlockHeight: {
-      type: Number,
-      default: 30,
-    },
-
-    /**
      * Defines gap which increases limit of displayed elements with selected options
      * @default 5
      * @property {number} increaseDisplayBy
@@ -896,6 +885,15 @@ export default Vue.extend({
     },
 
     /**
+     * Defines "height" css-property of every option element
+     * @property {number} anyOptionWrapperBlockHeight
+     */
+    anyOptionWrapperBlockHeight: {
+      type: [Number, String],
+      default: "auto",
+    },
+
+    /**
      * "id" attribute of search field
      * @default null
      * @property {string|number|null} inputId
@@ -1058,16 +1056,6 @@ export default Vue.extend({
       return this.optionsCountRestriction
        ? this.rawOptions.filter((option, index) => index + 1 <= this.optionsCountRestriction)
        : this.rawOptions;
-    },
-
-    /**
-     * Determines length of options list after filtering by
-     * maximal admissible options amount
-     * @method
-     * @returns {number} length
-     */
-    restrictedOptionsLength() {
-      return this.restrictedOptions.length;
     },
 
     /**
