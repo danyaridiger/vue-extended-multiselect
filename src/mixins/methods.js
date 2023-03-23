@@ -644,6 +644,7 @@ export default {
         return;
       } else {
         this.selectedOptions = [];
+        this.updateModelValue();
       }
 
       if (this.toggleOptionsBySelect) {
