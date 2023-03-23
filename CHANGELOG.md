@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.1.2**
+Current vue-extended-multiselect version: **0.1.3**
 
 ***
 
@@ -23,3 +23,12 @@ Current vue-extended-multiselect version: **0.1.2**
 ### 0.1.1 (2023-03-20)
 
 * Fixing bug with "pattern-changed" event with a call to the internal loader method.
+
+### 0.1.2 (2023-03-22)
+
+* Fixing bug with always fixed "height" css-property of option block.
+* Setting default value of "anyOptionWrapperBlockHeight" optional prop to "auto".
+
+### 0.1.3 (2023-03-22)
+
+* Fixing a bug with v-model not clearing by computed property.

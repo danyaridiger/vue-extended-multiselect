@@ -264,10 +264,8 @@ export default {
 
       if (withRemoval) {
         this.updateModelValue();
-    
-        this.skipNextUpdate = true;
 
-        this.selectedOptionsWatcher = this.$watch("selectedOptions", (value) => {
+        this.selectedOptionsWatcher = this.$watch("selectedOptions", () => {
           this.updateModelValue();
       
           if (this.resetSearchByValue) {
@@ -535,11 +533,8 @@ export default {
        * Changes selected options based on external modelValue changes
        * @method
        */
-      handler() {
-        if (this.skipNextUpdate) {
-          this.skipNextUpdate = false;
-          return;
-        }
+      handler(value, prevValue) {
+        if (JSON.stringify(value) === JSON.stringify(prevValue)) return;
 
         this.setPreselectedOptionsByModelValue(true);
       },
