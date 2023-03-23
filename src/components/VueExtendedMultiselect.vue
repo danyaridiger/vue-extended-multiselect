@@ -199,10 +199,15 @@
           >
           </slot>
         </template>
-        <template
+        <template 
           v-if="$slots.marker"
-          #marker>
-          <slot name="marker"></slot>
+          #marker="{ selected }"
+        >
+          <slot 
+            name="marker"
+            :selected="selected"
+          >
+          </slot>
         </template>
         <template
           v-if="$slots.noResults && noResultsBlockShown"
@@ -264,7 +269,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.1.4
+ * @version 0.1.5
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",

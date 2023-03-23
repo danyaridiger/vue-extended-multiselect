@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.1.4**
+Current vue-extended-multiselect version: **0.1.5**
 
 ***
 
@@ -37,3 +37,7 @@ Current vue-extended-multiselect version: **0.1.4**
 
 * Fixing bug with hidden placeholder when "showSearchField" prop is set to false.
 * Fixing bug with deselection of all options when "showSelectedOptions" prop is set to true.
+
+### 0.1.5 (2023-03-23)
+
+* Adding "selected" flag to "marker" slot.

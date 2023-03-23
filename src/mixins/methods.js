@@ -639,6 +639,7 @@ export default {
         }
 
         this.selectedOptions.splice(index, 1);
+        this.updateModelValue();
 
         return;
       } else {
