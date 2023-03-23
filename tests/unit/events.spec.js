@@ -69,6 +69,8 @@ describe("events", () => {
 
     const cleanButton = wrapper.find("#extended__multiselect-cancel");
 
+    await mockOptionSelection(wrapper);
+
     await fireEvent.click(cleanButton.element);
 
     expect(wrapper.emitted().clean).toBeDefined();

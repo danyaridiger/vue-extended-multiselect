@@ -558,7 +558,6 @@ export default {
    * @listens extended:toggle-options
    * @listens extended:select-option
    * @listens extended:deselect-option
-   * @listens extended:clean-options
    * @listens extended:create-option
    * @listens extended:increase-display
    * @listens extended:loader-pattern-changed
@@ -616,9 +615,11 @@ export default {
          */
         this.$emit("select", eventData);
       }
+
+      this.updateModelValue();
     });
 
-    this.emitter.$on("extended:deselect-option", (index = null, clearAll) => {
+    this.emitter.$on("extended:deselect-option", (index = null, clearAll, skipNextRemoval) => {
       if (this.multiple && !clearAll) {
         const deselectedOption = this.selectedOptions[index];
 
@@ -634,7 +635,7 @@ export default {
          */
         this.$emit("clean", eventData);
 
-        if (payload.skipNextRemoval) {
+        if (skipNextRemoval) {
           this.skipNextRemoval = true;
         }
 
@@ -643,6 +644,20 @@ export default {
 
         return;
       } else {
+        if (!this.selectedOptions.length) return;
+        
+        const eventData = this.simpleEvents
+         ? this.selectedOptions
+         : this.createEventFields(this.selectedOptions, "option");
+
+        /**
+         * @event clean
+         * @type {Object}
+         * @property {string} inputId - id of search field set by "id" prop
+         * @property {UnionPropType} options - just now deselected options
+         */
+        this.$emit("clean", eventData);
+
         this.selectedOptions = [];
         this.updateModelValue();
       }
@@ -650,17 +665,6 @@ export default {
       if (this.toggleOptionsBySelect) {
         this.emitter.$emit("extended:rollup-options");
       }
-    });
-
-    this.emitter.$on("extended:clean-options", (selectedOptions) => {
-      const eventData = this.simpleEvents 
-       ? selectedOptions 
-       : this.createEventFields(selectedOptions, "options");
-      /**
-       * @see clean
-       * @property {Array} options - just now deselected options
-       */
-      this.$emit("clean", eventData);
     });
     
     this.emitter.$on("extended:create-option", (createdOption) => {

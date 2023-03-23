@@ -21,7 +21,7 @@ export default {
       
       if (!this.showSearchField) return;
 
-      this.emitter.$emit("extended:clean-options", this.selectedOptions);
+      this.emitter.$emit("extended:clean-options");
 
       this.setSearchValue(null);
       this.setSearchPattern(null);

@@ -376,7 +376,7 @@ export default {
             return JSON.stringify(selectedOption) === JSON.stringify(option);
           });
     
-          this.emitter.$emit("extended:deselect-option", { skipNextRemoval: true, index });
+          this.emitter.$emit("extended:deselect-option", null, false, true);
           
           return;
         }

@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.1.7**
+Current vue-extended-multiselect version: **0.1.8**
 
 ***
 
@@ -49,3 +49,7 @@ Current vue-extended-multiselect version: **0.1.7**
 ### 0.1.7 (2023-03-23)
 
 * Fixing bug with non-rendering "labelBlock" slot when "showSearchField" prop is set to false.
+
+### 0.1.8 (2023-03-23)
+
+* Fixing bug with "clean" event payload when all options were deselected.
