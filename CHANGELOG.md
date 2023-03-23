@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.1.6**
+Current vue-extended-multiselect version: **0.1.7**
 
 ***
 
@@ -45,3 +45,7 @@ Current vue-extended-multiselect version: **0.1.6**
 ### 0.1.6 (2023-03-23)
 
 * Fixing bug with v-model not updating by clearing of all options.
+
+### 0.1.7 (2023-03-23)
+
+* Fixing bug with non-rendering "labelBlock" slot when "showSearchField" prop is set to false.

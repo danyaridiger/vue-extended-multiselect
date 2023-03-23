@@ -55,12 +55,12 @@
           :input-id="inputId"
         >
           <template
-            v-if="$scopedSlots.labelBlock && !showSearchField"
+            v-if="$scopedSlots.labelBlock"
             #labelBlock="{ labelBlockValue }"
           >
             <slot
               name="labelBlock"
-              :label="labelBlockValue"
+              :label-block-value="labelBlockValue"
             >
             </slot>
           </template>
@@ -88,7 +88,7 @@
           >
             <slot 
               name="showMore"
-              :increase="showMoreOptions"
+              :show-more-options="showMoreOptions"
             >
             </slot>
           </template>
@@ -269,7 +269,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.1.6
+ * @version 0.1.7
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
