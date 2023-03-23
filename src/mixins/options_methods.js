@@ -372,7 +372,12 @@ export default {
         const optionDeselected = this.lookForObjectOptions(option);
 
         if (!optionDeselected) {
-          this.emitter.$emit("extended:deselect-option");
+          const index = this.selectedOptions.findIndex((selectedOption) => {
+            return JSON.stringify(selectedOption) === JSON.stringify(option);
+          });
+    
+          this.emitter.$emit("extended:deselect-option", { skipNextRemoval: true, index });
+          
           return;
         }
       }

@@ -534,7 +534,11 @@ export default {
        * @method
        */
       handler(value, prevValue) {
-        if (JSON.stringify(value) === JSON.stringify(prevValue)) return;
+        if (JSON.stringify(value) === JSON.stringify(prevValue) || this.skipNextRemoval) {
+          this.skipNextRemoval = false;
+
+          return;
+        }
 
         this.setPreselectedOptionsByModelValue(true);
       },
@@ -630,7 +634,12 @@ export default {
          */
         this.$emit("clean", eventData);
 
+        if (payload.skipNextRemoval) {
+          this.skipNextRemoval = true;
+        }
+
         this.selectedOptions.splice(index, 1);
+
         return;
       } else {
         this.selectedOptions = [];

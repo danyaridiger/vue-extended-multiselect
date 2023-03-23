@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.1.3**
+Current vue-extended-multiselect version: **0.1.4**
 
 ***
 
@@ -32,3 +32,8 @@ Current vue-extended-multiselect version: **0.1.3**
 ### 0.1.3 (2023-03-22)
 
 * Fixing a bug with v-model not clearing by computed property.
+
+### 0.1.4 (2023-03-23)
+
+* Fixing bug with hidden placeholder when "showSearchField" prop is set to false.
+* Fixing bug with deselection of all options when "showSelectedOptions" prop is set to true.

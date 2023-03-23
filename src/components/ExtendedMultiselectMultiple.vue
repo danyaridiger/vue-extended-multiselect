@@ -1,5 +1,11 @@
 <template>
   <div class="extended__multiselect-block extended__multiselect-block--multiple">
+    <span
+      v-if="placeholderBlockShown"
+      class="extended__multiselect-placeholder"
+    >
+      {{ appropriatePlaceholder }}
+    </span>
     <div
       v-for="(option, index) in limitRestriction"
       :key="index"
@@ -72,6 +78,16 @@ export default Vue.extend({
   mixins: [labels, multiple_methods],
 
   props: {
+    /**
+     * Defines placeholder for extended multiselect 
+     * placeholder element
+     * @property {string} appropriatePlaceholder
+     */
+    appropriatePlaceholder: {
+      type: String,
+      default: "",
+    },
+
     /**
      * Function that creates custom label for
      * block with selected option
@@ -173,6 +189,16 @@ export default Vue.extend({
     multipleBlocksLimitMessage: {
       type: Function,
       required: true,
+    },
+
+    /**
+     * Determines whether to show extended multiselect 
+     * placeholder element
+     * @property {boolean} placeholderBlockShown
+     */
+    placeholderBlockShown: {
+      type: Boolean,
+      default: false,
     },
 
     /**

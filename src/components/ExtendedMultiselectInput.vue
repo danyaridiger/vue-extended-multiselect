@@ -43,8 +43,10 @@
       :disabled="disabled"
       :loading="loading"
       :icon-filter="iconFilter"
+      :placeholder-block-shown="!selectedOptions.length"
       :show-deselect-icon-loader="showDeselectIconLoader"
       :toggle-multiple-blocks-limit="toggleMultipleBlocksLimit"
+      :appropriate-placeholder="appropriatePlaceholder"
       :empty-objects-placeholder="emptyObjectsPlaceholder"
       :label="label"
       :multiple-blocks-limit-message="multipleBlocksLimitMessage"
@@ -136,6 +138,12 @@
     class="extended__multiselect-block"
     v-else
   >
+    <span
+      v-if="placeholderBlockShown"
+      class="extended__multiselect-placeholder"
+    >
+      {{ appropriatePlaceholder }}
+    </span>
     <slot
       name="labelBlock"
       :label-block-value="singleLabel"

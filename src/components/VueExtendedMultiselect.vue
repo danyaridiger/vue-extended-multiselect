@@ -264,7 +264,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.1.3
+ * @version 0.1.4
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
@@ -923,6 +923,7 @@ export default Vue.extend({
   data() {
     return {
       dropdownActive: false,
+      skipNextRemoval: false,
       externalOptionsLoader: null,
       chosenToggleAppearanceSide: null,
       selectedOptionsWatcher: null,
