@@ -24,6 +24,7 @@ export default {
      * @emits extended:increase-display
      */
     showMoreOptions() {
+
       this.optionsLimitIncreaser += this.increaseDisplayBy;
       this.emitter.$emit("extended:increase-display", this.optionsLimitIncreaser);
     },

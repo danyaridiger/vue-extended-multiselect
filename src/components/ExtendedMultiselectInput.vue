@@ -58,6 +58,17 @@
       :create-custom-option-label="createCustomOptionLabel"
     >
       <template
+        v-if="$scopedSlots.multipleBlocks"
+        #multipleBlocks="{ selectedOptions, deselectBlock }"
+      >
+        <slot
+          name="multipleBlocks"
+          :selected-options="selectedOptions"
+          :deselect-block="deselectBlock"
+        >
+        </slot>
+      </template>
+      <template
         v-if="$scopedSlots.optionBlock"
         #optionBlock="{ label, deselectBlock, index }"
       >
@@ -104,6 +115,17 @@
       :emitter="emitter"
       :create-custom-option-label="createCustomOptionLabel"
     >
+      <template
+        v-if="$scopedSlots.multipleBlocks"
+        #multipleBlocks="{ selectedOptions, deselectBlock }"
+      >
+        <slot
+          name="multipleBlocks"
+          :selected-options="selectedOptions"
+          :deselect-block="deselectBlock"
+        >
+        </slot>
+      </template>
       <template
         v-if="$scopedSlots.optionBlock"
         #optionBlock="{ label, deselectBlock, index }"
@@ -207,15 +229,6 @@ export default Vue.extend({
      * @property {boolean} disabled
      */
     disabled: {
-      type: Boolean,
-      required: true,
-    },
-
-    /**
-     * Determines whether option list expanded or not
-     * @property {boolean} dropdownActive
-     */
-     dropdownActive: {
       type: Boolean,
       required: true,
     },

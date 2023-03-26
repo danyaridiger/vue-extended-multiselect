@@ -800,7 +800,7 @@ describe("props", () => {
 
     await fireEvent.click(increaserWrapper.element);
 
-    const multipleWrapper = wrapper.find(".extended__multiselect-block--multiple");
+    const multipleWrapper = wrapper.find(".extended__multiselect-block--multiple > div");
 
     expect(multipleWrapper.element.children).toHaveLength(2);
     expect(multipleWrapper.text()).toMatch(globalThis.OPTIONS[1].label);
@@ -1018,10 +1018,9 @@ describe("props", () => {
   });
 
 
-  it("correctly handles 'preselectedOptions' prop value", async (done) => {
-    expect.assertions(2);
-
+  it("correctly handles 'preselectedOptions' prop value", async () => {
     const propsData = {
+      defaultExpanded: true,
       multiple: true,
       preselectedOptions:  [globalThis.OPTIONS[0], globalThis.OPTIONS[1]],
       options: globalThis.OPTIONS,
@@ -1029,19 +1028,14 @@ describe("props", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    const multipleWrapper = wrapper.findComponent(ExtendedMultiselectMultiple);
+    const multipleWrapper = wrapper.find(".extended__multiselect-block--multiple > div");
 
-    process.nextTick(async () => {
-      await expandOptionsList(wrapper);
-      
-      const optionsWrapper = wrapper.findComponent(ExtendedMultiselectOptions);
-      const optionsListWrapper = optionsWrapper.find(".extended__multiselect-options_container");
+    expect(multipleWrapper.element.children).toHaveLength(2);
 
-      expect(multipleWrapper.element.children).toHaveLength(2);
-      expect(optionsListWrapper.element.children).toHaveLength(2);
+    const optionsWrapper = wrapper.findComponent(ExtendedMultiselectOptions);
+    const optionsListWrapper = optionsWrapper.find(".extended__multiselect-options_container");
 
-      done();
-    });
+    expect(optionsListWrapper.element.children).toHaveLength(2);
   });
 
 

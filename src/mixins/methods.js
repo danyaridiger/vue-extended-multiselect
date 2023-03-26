@@ -402,7 +402,6 @@ export default {
      */
     toggleDetector(mouseEvent, pattern, mode) {
       let target = mouseEvent.target;
-      const optionPattern = /^extended__multiselect-options_option/i;
 
       let filteredHasToggle = Array.prototype.filter.call(target.classList, (className) => {
         return pattern.test(className) === true;

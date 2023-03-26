@@ -6,53 +6,61 @@
     >
       {{ appropriatePlaceholder }}
     </span>
-    <div
-      v-for="(option, index) in limitRestriction"
-      :key="index"
-    >
+    <div>
       <slot
-        name="optionBlock"
-        :label="optionCreateLabel(option, index)"
-        :index="index"
+        name="multipleBlocks"
+        :selected-options="limitRestriction"
         :deselect-block="deselectBlock"
       >
-        <div :class="classes">
-          <span>{{ optionCreateLabel(option, index) }}</span>
-          <div :class="deselectClasses">
-            <img
-              alt=""
-              class="extended__multiselect_deselect-block-icon"
-              v-if="!showLoaderIcon"
-              :src="require('../assets/cancel.svg')"
-              @click.stop="deselectBlock(index)"
-            />
-            <extended-multiselect-loader
-              v-else
-              :icon-filter="iconFilter"
-              icon-size="deselect"
-            />
-          </div>
+        <div
+          v-for="(option, index) in limitRestriction"
+          :key="index"
+        >
+          <slot
+            name="optionBlock"
+            :label="optionCreateLabel(option)"
+            :index="index"
+            :deselect-block="deselectBlock"
+          >
+            <div :class="classes">
+              <span>{{ optionCreateLabel(option) }}</span>
+              <div :class="deselectClasses">
+                <img
+                  alt=""
+                  class="extended__multiselect_deselect-block-icon"
+                  v-if="!showLoaderIcon"
+                  :src="require('../assets/cancel.svg')"
+                  @click.stop="deselectBlock(index)"
+                />
+                <extended-multiselect-loader
+                  v-else
+                  :icon-filter="iconFilter"
+                  icon-size="deselect"
+                />
+              </div>
+            </div>
+          </slot>
         </div>
+        <slot
+          name="maxElements"
+          v-if="optionsLimitAchieved && !toggleMultipleBlocksLimit"
+        >
+          {{ multipleBlocksLimitMessage(overLimitOptionsCount) }}
+        </slot>
+        <slot
+          name="showMore"
+          v-if="optionIncreaserAvailable"
+          :show-more-options="showMoreOptions"
+        >
+          <div 
+            :class="[classes, increaserClass]"
+            @click.stop="showMoreOptions"
+          >
+            Show more options
+          </div>
+        </slot>
       </slot>
     </div>
-    <slot
-      name="maxElements"
-      v-if="optionsLimitAchieved && !toggleMultipleBlocksLimit"
-    >
-      {{ multipleBlocksLimitMessage(overLimitOptionsCount) }}
-    </slot>
-    <slot
-      name="showMore"
-      v-if="optionIncreaserAvailable"
-      :show-more-options="showMoreOptions"
-    >
-      <div 
-        :class="[classes, increaserClass]"
-        @click.stop="showMoreOptions"
-      >
-        Show more options
-      </div>
-    </slot>
   </div>
 </template>
 
@@ -79,59 +87,11 @@ export default Vue.extend({
 
   props: {
     /**
-     * Defines placeholder for extended multiselect 
-     * placeholder element
-     * @property {string} appropriatePlaceholder
-     */
-    appropriatePlaceholder: {
-      type: String,
-      default: "",
-    },
-
-    /**
-     * Function that creates custom label for
-     * block with selected option
-     * @property {Function} createCustomOptionLabel
-     */
-    createCustomOptionLabel: {
-      type: Function,
-      required: true,
-    },
-
-    /**
      * Blocks deselect block button
      * @property {boolean} disabled
      */
     disabled: {
       type: Boolean,
-      required: true,
-    },
-
-    /**
-     * Defines label for blocks with options of type "object"
-     * or Array instances which length/keys length equals 0
-     * @property {string} emptyObjectsPlaceholder
-     */
-    emptyObjectsPlaceholder: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * Determines field of option which will be displayed as label
-     * @property {string} label
-     */
-    label: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * Limit of hidden options amount to be shown next
-     * @property {number} increaseDisplayBy
-     */
-    increaseDisplayBy: {
-      type: Number,
       required: true,
     },
 
@@ -145,12 +105,13 @@ export default Vue.extend({
     },
 
     /**
-     * Limit of option blocks amount
-     * @property {number} multipleBlocksLimit
+     * Determines whether to show extended multiselect 
+     * placeholder element
+     * @property {boolean} placeholderBlockShown
      */
-    multipleBlocksLimit: {
-      type: Number,
-      default: null,
+    placeholderBlockShown: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -174,6 +135,26 @@ export default Vue.extend({
     },
 
     /**
+     * Defines placeholder for extended multiselect 
+     * placeholder element
+     * @property {string} appropriatePlaceholder
+     */
+    appropriatePlaceholder: {
+      type: String,
+      default: "",
+    },
+
+    /**
+     * Defines label for blocks with options of type "object"
+     * or Array instances which length/keys length equals 0
+     * @property {string} emptyObjectsPlaceholder
+     */
+    emptyObjectsPlaceholder: {
+      type: String,
+      required: true,
+    },
+
+    /**
      * Defines a svg-filter for icons
      * @property {string} iconFilter
      */
@@ -183,22 +164,40 @@ export default Vue.extend({
     },
 
     /**
-     * Function that creates limit message for maximal of selected options
-     * @property {Function} multipleBlocksLimitMessage
+     * Determines field of option which will be displayed as label
+     * @property {string} label
      */
-    multipleBlocksLimitMessage: {
-      type: Function,
+    label: {
+      type: String,
       required: true,
     },
 
     /**
-     * Determines whether to show extended multiselect 
-     * placeholder element
-     * @property {boolean} placeholderBlockShown
+     * Current theme of extended-multiselect
+     * used in class definition
+     * @property {string} themeType
      */
-    placeholderBlockShown: {
-      type: Boolean,
-      default: false,
+    themeType: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * Limit of hidden options amount to be shown next
+     * @property {number} increaseDisplayBy
+     */
+    increaseDisplayBy: {
+      type: Number,
+      required: true,
+    },
+
+    /**
+     * Limit of option blocks amount
+     * @property {number} multipleBlocksLimit
+     */
+    multipleBlocksLimit: {
+      type: Number,
+      default: null,
     },
 
     /**
@@ -220,12 +219,21 @@ export default Vue.extend({
     },
 
     /**
-     * Current theme of extended-multiselect
-     * used in class definition
-     * @property {string} themeType
+     * Function that creates custom label for
+     * block with selected option
+     * @property {Function} createCustomOptionLabel
      */
-    themeType: {
-      type: String,
+    createCustomOptionLabel: {
+      type: Function,
+      required: true,
+    },
+
+    /**
+     * Function that creates limit message for maximal of selected options
+     * @property {Function} multipleBlocksLimitMessage
+     */
+    multipleBlocksLimitMessage: {
+      type: Function,
       required: true,
     },
   },
@@ -283,7 +291,7 @@ export default Vue.extend({
     limitRestriction() {
       if (!this.optionsLimitIncreaser) return this.selectedOptions;
 
-      return this.selectedOptions.filter((selectedOption, index) => {
+      return this.selectedOptions.filter((_, index) => {
         return ++index <= this.optionsLimitIncreaser;
       });
     },

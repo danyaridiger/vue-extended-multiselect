@@ -30,7 +30,6 @@
           :auto-select-search-value="autoSelectSearchValue"
           :create-on-the-go="createOnTheGo"
           :disabled="disabled"
-          :dropdown-active="dropdownActive"
           :loading="internalLoading"
           :icon-filter="iconFilter"
           :multiple="multiple"
@@ -61,6 +60,17 @@
             <slot
               name="labelBlock"
               :label-block-value="labelBlockValue"
+            >
+            </slot>
+          </template>
+          <template
+            v-if="$scopedSlots.multipleBlocks"
+            #multipleBlocks="{ selectedOptions, deselectBlock }"
+          >
+            <slot
+              name="multipleBlocks"
+              :selected-options="selectedOptions"
+              :deselect-block="deselectBlock"
             >
             </slot>
           </template>
@@ -269,7 +279,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.1.8
+ * @version 0.2.0
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
@@ -1059,7 +1069,7 @@ export default Vue.extend({
       if (!this.rawOptions) return;
 
       return this.optionsCountRestriction
-       ? this.rawOptions.filter((option, index) => index + 1 <= this.optionsCountRestriction)
+       ? this.rawOptions.filter((_, index) => index + 1 <= this.optionsCountRestriction)
        : this.rawOptions;
     },
 
