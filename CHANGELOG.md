@@ -61,3 +61,7 @@ Current vue-extended-multiselect version: **0.2.0**
 * Removal of some excess props inside the component.
 * Ordering "Events" section in documentation in alphabetic order.
 * Ordering props in alphabetic order inside the component.
+
+### 0.2.1 (2023-09-01)
+
+* Updating dependencies and dev-dependencies.

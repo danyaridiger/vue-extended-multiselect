@@ -272,6 +272,10 @@ import preselectedOptionsUtils from "../mixins/preselected_options";
 import store from "../vuex/store";
 
 /**
+ * @todo Mark optional parameters of methods
+ */
+
+/**
  * @author Ridiger Daniil Dmitrievich, 2022
  * @mixes ClickOutsideMixin
  * @mixes EventsMixin
@@ -279,7 +283,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.2.0
+ * @version 0.2.1
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
