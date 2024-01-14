@@ -1,4 +1,4 @@
-# vue-extended-multiselect v0.3.0
+# vue-extended-multiselect v0.3.1
 
 ***
 
@@ -181,14 +181,6 @@ Vue extended multiselect provides following css-variables:
 ```
 
 You can override it globally or by particular instance class name.
-
-```css
-:root {
-  --basic-color: purple;
-  --outer-gap: 2rem;
-  --border: 1px dotted;
-}
-```
 
 ```html
   <vue-extended-multiselect class="instance-class" />

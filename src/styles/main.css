@@ -17,6 +17,11 @@
   font-style: inherit;
 }
 
+.extended-multiselect-wrapper,
+.extended__multiselect-options_container {
+  background-color: var(--hover-color);
+}
+
 .extended__multiselect-wrapper--disabled .extended__multiselect-container {
   background-color: var(--disabled);
   user-select: none;
@@ -88,6 +93,7 @@
   user-select: none;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
+  background-color: var(--hover-color);
   z-index: var(--z-index-options);
   border-bottom-right-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
