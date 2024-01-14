@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.3.1**
+Current vue-extended-multiselect version: **0.3.2**
 
 ***
 
@@ -75,3 +75,7 @@ Current vue-extended-multiselect version: **0.3.1**
 ### 0.3.1 (2024-01-14)
 
 * Changing some default styles and css-variables.
+
+### 0.3.2 (2024-01-14)
+
+* Adding css-variable --default-color for multiselect background color.
