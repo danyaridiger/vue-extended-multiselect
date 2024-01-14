@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.2.0**
+Current vue-extended-multiselect version: **0.3.0**
 
 ***
 
@@ -65,3 +65,9 @@ Current vue-extended-multiselect version: **0.2.0**
 ### 0.2.1 (2023-09-01)
 
 * Updating dependencies and dev-dependencies.
+
+### 0.3.0 (2023-09-01)
+
+* Updating dependencies and dev-dependencies.
+* Removal of "sass" dev-dependency.
+* Removal of "sass-loader" dev-dependency.

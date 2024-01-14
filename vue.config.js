@@ -1,3 +1,3 @@
 module.exports = {
-  transpileDependencies: ['yargs'],
+  transpileDependencies: ["yargs"],
 };
