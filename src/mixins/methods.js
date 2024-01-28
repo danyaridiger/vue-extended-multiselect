@@ -221,7 +221,7 @@ export default {
 
         if (
           (this.mappedOptions.includes(JSON.stringify(preselectedOption)) || !restriction)
-          && !mappedSelectedOptions.includes(JSON.stringify(preselectedOption))
+           && !mappedSelectedOptions.includes(JSON.stringify(preselectedOption))
         ) {
           const isObjectOrArray = typeof option === "object";
           const label = this.createLabel(isObjectOrArray, preselectedOption);
@@ -745,8 +745,8 @@ export default {
 
     if (
       this.defaultExpanded 
-      && !this.disabled
-      && typeof this.options !== "function"
+       && !this.disabled
+       && typeof this.options !== "function"
     ) {
       this.dropdownActive = true;
     }

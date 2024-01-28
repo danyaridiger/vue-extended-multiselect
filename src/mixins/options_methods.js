@@ -365,7 +365,7 @@ export default {
       if (option[this.disableByField] || this.defineDisabledOption(option)) return;
       if (
         clickEvent.target.id === "extended__multiselect-toggle"
-        || clickEvent.target.id === "extended__multiselect-cancel"
+         || clickEvent.target.id === "extended__multiselect-cancel"
       ) return; 
 
       if (this.selectedOptionsShown || this.externalOptionsLoader) {

@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.3.2**
+Current vue-extended-multiselect version: **0.4.0**
 
 ***
 
@@ -79,3 +79,10 @@ Current vue-extended-multiselect version: **0.3.2**
 ### 0.3.2 (2024-01-14)
 
 * Adding css-variable --default-color for multiselect background color.
+
+### 0.4.0 (2024-01-28)
+
+* Adding link to page with live examples.
+* Fixing bug with always basic icon filter.
+* Fixing bug with rendering icon filter instead of loader icon filter.
+* Fixing bug with "disabledPrimitiveOptions" prop accepting options of type "Array".

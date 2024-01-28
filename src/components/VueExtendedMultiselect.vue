@@ -31,7 +31,7 @@
           :create-on-the-go="createOnTheGo"
           :disabled="disabled"
           :loading="internalLoading"
-          :icon-filter="iconFilter"
+          :loader-icon-filter="loaderIconFilter"
           :multiple="multiple"
           :search-filter-active="searchFilterActive"
           :show-deselect-icon-loader="showDeselectIconLoader"
@@ -115,6 +115,7 @@
             :dropdown-active="dropdownActive"
             :loading="internalLoading"
             :icon-filter="iconFilter"
+            :loader-icon-filter="loaderIconFilter"
             :icon-size="iconSize"
             :toggle-icon="toggleIcon"
             :emitter="emitter"
@@ -133,6 +134,7 @@
             :show-search-field="showSearchField"
             :loading="internalLoading"
             :icon-filter="iconFilter"
+            :loader-icon-filter="loaderIconFilter"
             :icon-size="iconSize"
             :selected-options="selectedOptions"
             :emitter="emitter"
@@ -283,7 +285,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.3.2
+ * @version 0.4.0
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
@@ -810,9 +812,9 @@ export default Vue.extend({
       default: () => [],
       validator(value) {
         return value.every((option) => {
-          return typeof option === "string" || Array.isArray(option)
-          || typeof option === "number" || typeof option === "boolean"
-          || typeof option === "function";
+          return typeof option === "string" || typeof option === "number" 
+           || typeof option === "boolean"
+           || typeof option === "function";
         });
       },
     },
@@ -993,7 +995,7 @@ export default Vue.extend({
     },
 
     /**
-     * Defines a list of disabled options by types given in "disabledPrimitiveOptions" prop
+     * Defines a list of disabled primitive options given in "disabledPrimitiveOptions" prop
      * @method
      * @returns {Array} options
      */
@@ -1001,10 +1003,8 @@ export default Vue.extend({
       if (!this.disabledPrimitiveOptions) return null;
 
       return this.disabledPrimitiveOptions.map((disabledOption) => {
-        if (Array.isArray(disabledOption)) {
-          if (!disabledOption.length) return this.emptyObjectsPlaceholder;
-
-          return disabledOption.join(", ");
+        if (Array.isArray(disabledOption) || typeof disabledOption === "object") {
+          return null;
         }
 
         return disabledOption;

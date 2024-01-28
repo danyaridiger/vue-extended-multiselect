@@ -18,7 +18,7 @@
     />
     <extended-multiselect-loader 
       v-else
-      :icon-filter="iconFilter"
+      :icon-filter="loaderIconFilter"
       :icon-size="iconSize"
     />
     <svg
@@ -114,6 +114,24 @@ export default Vue.extend({
      */
     dropdownActive: {
       type: Boolean,
+      required: true,
+    },
+
+    /**
+     * Defines a svg-filter for icons
+     * @property {string} iconFilter
+     */
+     iconFilter: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * Defines a svg-filter for loader icons
+     * @property {string} loaderIconFilter
+     */
+    loaderIconFilter: {
+      type: String,
       required: true,
     },
 

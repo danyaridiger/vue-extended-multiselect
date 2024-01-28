@@ -16,7 +16,7 @@
     />
     <extended-multiselect-loader
       v-else
-      :icon-filter="iconFilter"
+      :icon-filter="loaderIconFilter"
       :icon-size="iconSize"
     />
   </div>
@@ -50,6 +50,15 @@ export default Vue.extend({
      */
     disabled: {
       type: Boolean,
+      required: true,
+    },
+
+    /**
+     * Defines a svg-filter for loader icons
+     * @property {string} loaderIconFilter
+     */
+    loaderIconFilter: {
+      type: String,
       required: true,
     },
 
