@@ -501,9 +501,7 @@ export default Vue.extend({
      * @returns {boolean} display
      */
     placeholderBlockShown() {
-      if (this.selectedOptions.length || this.searchFieldForwarding) {
-        return false;
-      }
+      if (this.selectedOptions.length) return false;
 
       return true;
     },

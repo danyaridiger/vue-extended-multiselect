@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.4.0**
+Current vue-extended-multiselect version: **0.4.1**
 
 ***
 
@@ -86,3 +86,8 @@ Current vue-extended-multiselect version: **0.4.0**
 * Fixing bug with always basic icon filter.
 * Fixing bug with rendering icon filter instead of loader icon filter.
 * Fixing bug with "disabledPrimitiveOptions" prop accepting options of type "Array".
+
+### 0.4.1 (2024-04-03)
+
+* Adding JSDoc blocks to tools.
+* Fixing bug with the placeholder disappearing after switching the list of options.
