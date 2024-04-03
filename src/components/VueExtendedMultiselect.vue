@@ -285,7 +285,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.4.2
+ * @version 0.4.3
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",

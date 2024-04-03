@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.4.2**
+Current vue-extended-multiselect version: **0.4.3**
 
 ***
 
@@ -95,3 +95,7 @@ Current vue-extended-multiselect version: **0.4.2**
 ### 0.4.2 (2024-04-03)
 
 * Fixing bug with incorrect extended multiselect base height.
+
+### 0.4.3 (2024-04-03)
+
+* Changing rotation of toggle icon.
