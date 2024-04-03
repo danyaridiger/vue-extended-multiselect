@@ -5,7 +5,7 @@
 .extended__multiselect-wrapper--disabled {
   position: relative;
   width: var(--max-size);
-  height: var(--max-size);
+  height: auto;
   cursor: var(--pointer-cursor);
 }
 

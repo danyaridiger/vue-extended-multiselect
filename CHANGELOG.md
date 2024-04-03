@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.4.1**
+Current vue-extended-multiselect version: **0.4.2**
 
 ***
 
@@ -91,3 +91,7 @@ Current vue-extended-multiselect version: **0.4.1**
 
 * Adding JSDoc blocks to tools.
 * Fixing bug with the placeholder disappearing after switching the list of options.
+
+### 0.4.2 (2024-04-03)
+
+* Fixing bug with incorrect extended multiselect base height.
