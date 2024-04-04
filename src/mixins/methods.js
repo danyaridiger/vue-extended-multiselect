@@ -168,7 +168,7 @@ export default {
     /**
      * Sets preselected option provided by "preselectedOption" prop
      * @method
-     * @emits extended:select-option
+     * @emits extended:preselect-option
      * @param {UnionPropType} preselectedOption - option to be selected
      * @param {boolean} restriction - restriction of preselected option
      */
@@ -193,7 +193,7 @@ export default {
       const isObjectOrArray = typeof preselectedOption === "object";
       const label = this.createLabel(isObjectOrArray, preselectedOption);
 
-      this.emitter.$emit("extended:select-option", {
+      this.emitter.$emit("extended:preselect-option", {
         label,
         option: preselectedOption,
       });
@@ -203,7 +203,7 @@ export default {
      * Sets preselected options provided by "preselectedOptions" prop 
      * if "multiple" prop equals true
      * @method
-     * @emits extended:select-option
+     * @emits extended:preselect-option
      * @param {Array} preselectedOptions - options to be selected
      * @param {boolean} restriction - restriction of preselected options
      */
@@ -228,7 +228,7 @@ export default {
 
           allOptionsWereSelected++;
 
-          this.emitter.$emit("extended:select-option", {
+          this.emitter.$emit("extended:preselect-option", {
             label,
             option: preselectedOption,
           });
@@ -252,7 +252,7 @@ export default {
 
       if (withRemoval) this.selectedOptionsWatcher();
 
-      if (this.multiple) {
+      if (Array.isArray(this.value) && this.multiple) {
         if (withRemoval) this.removeSelectedOptions();
 
         this.setPreselectedOptions(this.value, false);
@@ -289,7 +289,7 @@ export default {
         }
       }
     
-      if (this.preselectedOptions && this.multiple) {
+      if (!!this.preselectedOptions.length && this.multiple) {
         const initialLength = this.selectedOptions.length;
 
         this.setPreselectedOptions(this.preselectedOptions);
@@ -556,6 +556,7 @@ export default {
    * @listens extended:rollup-options
    * @listens extended:toggle-options
    * @listens extended:select-option
+   * @listens extended:preselect-option
    * @listens extended:deselect-option
    * @listens extended:create-option
    * @listens extended:increase-display
@@ -615,6 +616,16 @@ export default {
         this.$emit("select", eventData);
       }
 
+      this.updateModelValue();
+    });
+
+    this.emitter.$on("extended:preselect-option", (option) => {
+      if (this.multiple) {
+        this.selectedOptions.push(option.option);
+      } else {
+        this.selectedOptions = [option.option];
+      }
+  
       this.updateModelValue();
     });
 

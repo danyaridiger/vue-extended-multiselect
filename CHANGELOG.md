@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.4.3**
+Current vue-extended-multiselect version: **0.5.0**
 
 ***
 
@@ -99,3 +99,8 @@ Current vue-extended-multiselect version: **0.4.3**
 ### 0.4.3 (2024-04-03)
 
 * Changing rotation of toggle icon.
+
+### 0.5.0 (2024-04-04)
+
+* Changing behaviour of "select" event: it no longer fires after setting preselected options.
+* Fixing bug with incorrect modelValue type in preselected options setter method.

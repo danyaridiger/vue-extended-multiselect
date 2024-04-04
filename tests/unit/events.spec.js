@@ -47,9 +47,16 @@ describe("events", () => {
       simpleEvents: false,
       inputId: globalThis.INPUT_ID,
       options: globalThis.OPTIONS,
+      preselectedOption: 126,
     };
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
+
+    expect(wrapper.emitted().select).not.toBeDefined();
+    
+    const multipleWrapper = wrapper.find(".extended__multiselect-block--multiple > div");
+
+    expect(multipleWrapper.element.children).toHaveLength(1);
 
     await mockOptionSelection(wrapper);
 

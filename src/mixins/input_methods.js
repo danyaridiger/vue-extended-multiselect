@@ -61,6 +61,24 @@ export default {
 
       this.emitter.$emit("extended:rollup-options", true);
     },
+
+    /**
+     * Rolls up options list after option selection
+     * and sets single option label
+     * @method
+     * @param {UnionPropType} option - option to be selected
+     */
+    rollupIfSelected(option) {
+      if (this.toggleOptionsBySelect) {
+        this.rollUp();
+      }
+
+      if (this.multiple) {
+        return;
+      } else {
+        this.singleLabel = option.label;
+      }
+    },
     
     /**
      * Activates debounced version of options list filter
@@ -127,6 +145,7 @@ export default {
    * @listens extended:field-focus
    * @listens extended:rollup-options
    * @listens extended:select-option
+   * @listens extended:preselect-option
    * @listens extended:deselect-option
    * @listens extended:clean-options
    * @listens extended:clear-field
@@ -160,15 +179,11 @@ export default {
     });
 
     this.emitter.$on("extended:select-option", (option) => {
-      if (this.toggleOptionsBySelect) {
-        this.rollUp();
-      }
+      this.rollupIfSelected(option);
+    });
 
-      if (this.multiple) {
-        return;
-      } else {
-        this.singleLabel = option.label;
-      }
+    this.emitter.$on("extended:preselect-option", (option) => {
+      this.rollupIfSelected(option);
     });
 
     this.emitter.$on("extended:deselect-option", () => {
