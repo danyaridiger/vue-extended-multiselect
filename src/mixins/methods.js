@@ -306,13 +306,15 @@ export default {
      * @returns {string} position
      */
     toggleAppearanceRestrictor() {
-      if (!window) return "under";
+      if (!window || !this.$refs.extendedMultiselectOptions) return "under";
 
       const innerHeight = window.innerHeight;
+      const offsetHeight = this.$refs.extendedMultiselectOptions.offsetHeight
+       + this.$refs.extendedMultiselect.offsetHeight;
       const offsetTop = this.$refs.extendedMultiselect.getBoundingClientRect().y;
       const difference = innerHeight - offsetTop;
 
-      if (difference > this.toggleMaxHeight) {
+      if (difference > offsetHeight) {
         return "under";
       } else {
         return "atop";
@@ -324,7 +326,7 @@ export default {
      * @method
      */
     toggleAppearanceRestrictorActivate() {
-      if (!this.dropdownActive) {
+      if (this.dropdownActive) {
         this.chosenToggleAppearanceSide = this.toggleAppearanceSide !== "auto"
          ? this.toggleAppearanceSide
          : this.toggleAppearanceRestrictor();
@@ -444,15 +446,17 @@ export default {
     toggleOptions() {
       if (this.internalLoading || this.disabled || this.dropdownDisabled) return;
 
-      this.toggleAppearanceRestrictorActivate();
+      this.dropdownActive = !this.dropdownActive;
+
+      this.$nextTick(() => {
+        this.toggleAppearanceRestrictorActivate();
+      });
 
       if (!this.dropdownActive) {
         this.activeEmitter();
       } else {
         this.closeEmitter();
       }
-
-      this.dropdownActive = !this.dropdownActive;
     },
 
     /**
@@ -577,10 +581,12 @@ export default {
     this.emitter.$on("extended:expand-options", () => {
       if (this.dropdownActive || this.dropdownDisabled) return;
       
-      this.toggleAppearanceRestrictorActivate();
-      this.activeEmitter();
-
       this.dropdownActive = true;
+      
+      this.$nextTick(() => {
+        this.toggleAppearanceRestrictorActivate();
+      });
+      this.activeEmitter();
     });
 
     this.emitter.$on("extended:rollup-options", () => {
@@ -760,6 +766,10 @@ export default {
        && typeof this.options !== "function"
     ) {
       this.dropdownActive = true;
+
+      this.$nextTick(() => {
+        this.toggleAppearanceRestrictorActivate();
+      });
     }
 
     this.emitter.$on("extended:loader-pattern-changed", (pattern) => {

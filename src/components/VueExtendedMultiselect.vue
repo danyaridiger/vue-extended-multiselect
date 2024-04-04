@@ -147,6 +147,7 @@
       type="transition"
     >
       <extended-multiselect-options
+        ref="extendedMultiselectOptions"
         v-if="dropdownActive"
         :auto-select-created-option="autoSelectCreatedOption"
         :clear-by-select-when-multiple="clearBySelectWhenMultiple"
@@ -285,7 +286,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.5.0
+ * @version 0.5.1
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",

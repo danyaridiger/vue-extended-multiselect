@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.5.0**
+Current vue-extended-multiselect version: **0.5.1**
 
 ***
 
@@ -104,3 +104,7 @@ Current vue-extended-multiselect version: **0.5.0**
 
 * Changing behaviour of "select" event: it no longer fires after setting preselected options.
 * Fixing bug with incorrect modelValue type in preselected options setter method.
+
+### 0.5.1 (2024-04-04)
+
+* Fixing bug with incorrect options list placement.
