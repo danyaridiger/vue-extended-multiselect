@@ -309,7 +309,7 @@ export default {
       if (!window || !this.$refs.extendedMultiselectOptions) return "under";
 
       const innerHeight = window.innerHeight;
-      const offsetHeight = this.$refs.extendedMultiselectOptions.offsetHeight
+      const offsetHeight = this.$refs.extendedMultiselectOptions.$el.offsetHeight
        + this.$refs.extendedMultiselect.offsetHeight;
       const offsetTop = this.$refs.extendedMultiselect.getBoundingClientRect().y;
       const difference = innerHeight - offsetTop;

@@ -435,7 +435,7 @@ export default Vue.extend({
       fieldWasShown: false,
       atopWithScroll: null,
       enterIndex: null,
-      heightFromMounted: null,
+      heightFromMounted: {},
       underWithScroll: null,
     };
   },
