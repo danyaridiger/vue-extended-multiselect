@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.5.1**
+Current vue-extended-multiselect version: **0.5.2**
 
 ***
 
@@ -108,3 +108,7 @@ Current vue-extended-multiselect version: **0.5.1**
 ### 0.5.1 (2024-04-04)
 
 * Fixing bug with incorrect options list placement.
+
+### 0.5.2 (2024-04-04)
+
+* Fixing bug with co-appearance of search field and placeholder.

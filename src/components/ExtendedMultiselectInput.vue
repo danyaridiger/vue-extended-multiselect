@@ -161,7 +161,7 @@
     v-else
   >
     <span
-      v-if="placeholderBlockShown"
+      v-if="hintBlockShown"
       class="extended__multiselect-placeholder"
     >
       {{ appropriatePlaceholder }}
@@ -486,6 +486,18 @@ export default Vue.extend({
     },
 
     /**
+     * Determines whether to show placeholder block
+     * if search field is hidden
+     * @function
+     * @returns {boolean} display
+     */
+    hintBlockShown() {
+      if (this.selectedOptions.length) return false;
+
+      return true;
+    },
+
+    /**
      * Sets "margin-top" css property to multiple option blocks
      * if search field is shown
      * @method
@@ -501,7 +513,7 @@ export default Vue.extend({
      * @returns {boolean} display
      */
     placeholderBlockShown() {
-      if (this.selectedOptions.length) return false;
+      if (this.selectedOptions.length || this.searchFieldForwarding) return false;
 
       return true;
     },
