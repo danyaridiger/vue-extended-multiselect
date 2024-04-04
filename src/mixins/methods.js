@@ -556,6 +556,7 @@ export default {
    * @emits increase
    * @emits pattern-changed
    * @emits extended:rollup-options
+   * @listens extended:available-options
    * @listens extended:expand-options
    * @listens extended:rollup-options
    * @listens extended:toggle-options
@@ -577,6 +578,12 @@ export default {
     }, { deep: true });
     
     this.chosenToggleAppearanceSide = this.toggleAppearanceSide;
+
+    this.emitter.$on("extended:available-options", () => {
+      this.$nextTick(() => {
+        this.toggleAppearanceRestrictorActivate();
+      });
+    });
 
     this.emitter.$on("extended:expand-options", () => {
       if (this.dropdownActive || this.dropdownDisabled) return;

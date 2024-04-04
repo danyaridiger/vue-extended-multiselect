@@ -467,6 +467,20 @@ export default {
     ]),
   },
 
+  watch: {
+    /**
+     * Triggers appearance side restrictor to set a position 
+     * of dropdown appearance
+     * @function
+     * @emits extended:available-options
+     */
+    availableOptions: {
+      handler() {
+        this.emitter.$emit("extended:available-options");
+      },
+    },
+  },
+
   /**
    * "created" hook of ExtendedMultiselectOptions component
    * @listens extended:select-enter
