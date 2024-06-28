@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.5.4**
+Current vue-extended-multiselect version: **0.5.5**
 
 ***
 
@@ -120,3 +120,7 @@ Current vue-extended-multiselect version: **0.5.4**
 ### 0.5.4 (2024-04-04)
 
 * Fixing bug with incorrect options list appearance side after changing available options.
+
+### 0.5.5 (2024-06-28)
+
+* Fixing incorrect css-variables interpolation.

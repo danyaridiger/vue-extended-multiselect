@@ -30,7 +30,7 @@
 
 .extended__multiselect-wrapper--disabled .extended__multiselect-input,
 .extended__multiselect-wrapper--disabled .extended__multiselect-input--hidden {
-  cursor: --default-cursor;
+  cursor: var(--default-cursor);
 }
 
 .extended__multiselect-container {
@@ -427,7 +427,7 @@
 .extended__multiselect-options_option--disabled {
   background-color: var(--disabled);
   user-select: none;
-  cursor: --default-cursor;
+  cursor: var(--default-cursor);
 }
 
 .extended__multiselect_deselect-block-icon {
