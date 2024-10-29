@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.5.5**
+Current vue-extended-multiselect version: **0.5.6**
 
 ***
 
@@ -124,3 +124,7 @@ Current vue-extended-multiselect version: **0.5.5**
 ### 0.5.5 (2024-06-28)
 
 * Fixing incorrect css-variables interpolation.
+
+### 0.5.6 (2024-10-29)
+
+* Fixing bug with the wrong number of blocks in the displayed limit message.

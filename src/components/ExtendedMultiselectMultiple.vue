@@ -324,9 +324,9 @@ export default Vue.extend({
      * @returns {number|null} amount
      */
     overLimitOptionsCount() {
-      if (this.selectedOptions.length <= this.multipleBlocksLimit) return null;
+      if (this.selectedOptions.length <= this.optionsLimitIncreaser) return null;
 
-      return this.selectedOptions.length - this.multipleBlocksLimit;
+      return this.selectedOptions.length - this.optionsLimitIncreaser;
     },
 
     /**
