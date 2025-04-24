@@ -159,7 +159,7 @@ describe("props", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    const toggleWrapper = wrapper.find("#extended__multiselect-toggle");
+    const toggleWrapper = wrapper.find(".extended__multiselect-toggle");
     const inputWrapper = wrapper.findComponent(ExtendedMultiselectInput);
 
     await fireEvent.click(toggleWrapper.element);
@@ -227,7 +227,7 @@ describe("props", () => {
     
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    const toggleWrapper = wrapper.find("#extended__multiselect-toggle");
+    const toggleWrapper = wrapper.find(".extended__multiselect-toggle");
 
     await mockOptionSelection(wrapper);
     await expandOptionsList(wrapper);
@@ -344,7 +344,7 @@ describe("props", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    const cancelWrapper = wrapper.find("#extended__multiselect-cancel");
+    const cancelWrapper = wrapper.find(".extended__multiselect-cancel");
 
     expect(cancelWrapper.exists()).toBeTruthy();
     expect(cancelWrapper.isVisible()).toBeTruthy();
@@ -480,7 +480,7 @@ describe("props", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    let toggleWrapper = wrapper.find("#extended__multiselect-toggle");
+    let toggleWrapper = wrapper.find(".extended__multiselect-toggle");
     let inputWrapper = wrapper.find("input");
 
     await inputWrapper.setValue(globalThis.SEARCH_VALUE);
@@ -490,7 +490,7 @@ describe("props", () => {
 
     propsData.togglingSavesSearchValue = false;
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
-    toggleWrapper = wrapper.find("#extended__multiselect-toggle");
+    toggleWrapper = wrapper.find(".extended__multiselect-toggle");
     inputWrapper = wrapper.find("input");
 
     await inputWrapper.setValue(globalThis.SEARCH_VALUE);
@@ -621,7 +621,7 @@ describe("props", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    const toggleWrapper = wrapper.find("#extended__multiselect-toggle").find("img");
+    const toggleWrapper = wrapper.find(".extended__multiselect-toggle").find("img");
 
     expect(toggleWrapper.classes()).toContain("extended__multiselect-filter_basic");
   });
@@ -634,7 +634,7 @@ describe("props", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    const toggleWrapper = wrapper.find("#extended__multiselect-toggle").find("img");
+    const toggleWrapper = wrapper.find(".extended__multiselect-toggle").find("img");
 
     expect(toggleWrapper.classes()).toContain("extended__multiselect-toggle_icon-large");
   });
@@ -755,7 +755,7 @@ describe("props", () => {
 
     wrapper = await mountComponent(VueExtendedMultiselect, false, propsData);
 
-    const toggleWrapper = wrapper.find("#extended__multiselect-toggle");
+    const toggleWrapper = wrapper.find(".extended__multiselect-toggle");
     const icon = toggleWrapper.find("img");
 
     expect(toggleWrapper.props("toggleIcon")).toEqual("base-arrow");

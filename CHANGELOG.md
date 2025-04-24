@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.5.6**
+Current vue-extended-multiselect version: **0.5.7**
 
 ***
 
@@ -128,3 +128,8 @@ Current vue-extended-multiselect version: **0.5.6**
 ### 0.5.6 (2024-10-29)
 
 * Fixing bug with the wrong number of blocks in the displayed limit message.
+
+### 0.5.7 (2025-04-24)
+
+* Removal of unnecessary identifiers.
+* Changing default value of "--icons-align-self" css-variable to "center".

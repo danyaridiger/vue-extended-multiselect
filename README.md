@@ -1,4 +1,4 @@
-# vue-extended-multiselect v0.5.6
+# vue-extended-multiselect v0.5.7
 
 ***
 
@@ -17,7 +17,7 @@ These examples are based on Vue3, but you can use the same props/slots/events in
 
 ### Installation with yarn
 
-``yarn install --production vue-extended-multiselect``
+``yarn add vue-extended-multiselect``
 
 ### Importing
 
@@ -178,7 +178,7 @@ Vue extended multiselect provides following css-variables:
 
   --border: 1px solid;
   --default-cursor: default;
-  --icons-align-self: start;
+  --icons-align-self: center;
   --icons-justify-self: center;
   --pointer-cursor: pointer;
   --wrapper-transition: border-top-left-radius 250ms ease 0s, border-top-right-radius 250ms ease 0s,
@@ -191,12 +191,14 @@ You can override it globally or by particular instance class name.
   <vue-extended-multiselect class="instance-class" />
 ```
 
-```css
+```html
+<style scoped>
 .instance-class {
   --basic-color: purple;
   --outer-gap: 2rem;
   --border: 1px dotted;
 }
+</style>
 ```
 
 ## Styling with props
