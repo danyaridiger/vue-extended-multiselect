@@ -153,6 +153,7 @@ export default {
    * @listens extended:skip-block-blur
    * @listens extended:skip-block-blur-zeroing
    * @listens extended:trigger-selection
+   * @listens extended:preserve-search-field
    */
   created() {
     this.emitter.$on("extended:field-focus", () => {
@@ -219,6 +220,14 @@ export default {
         this.searchFieldFocused = false;
       }
       this.optionWillBeTriggered = triggerState;
+    });
+
+    this.emitter.$on("extended:preserve-search-field", (preserveState) => {
+      if (!this.multiple && this.selectedOptions.length) {
+        this.searchFieldPreserving = preserveState;
+      }
+
+      this.searchPlaceholderPreserving = preserveState;
     });
   },
 };

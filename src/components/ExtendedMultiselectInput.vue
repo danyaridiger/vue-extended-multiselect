@@ -24,7 +24,7 @@
       v-show="!searchFieldForwarding && !multiple && !placeholderBlockShown"
       @click="expand"
     >
-      <slot 
+      <slot
         name="labelBlock"
         :label-block-value="singleLabel"
       >
@@ -457,11 +457,12 @@ export default Vue.extend({
       reversePrevented: false,
       searchFieldFocused: false,
       optionWillBeTriggered: false,
+      searchFieldPreserving: false,
+      searchPlaceholderPreserving: false,
       searchValue: "",
       singleLabel: "",
       blurSkipByToggleIcon: 0,
       blurSkipByBlock: 0,
-      labelBlocks: [],
       searchDebounce: new Debounce(() => {
         const searchPattern = this.searchValue ? new RegExp(`${this.searchValue}`, "i") : null;
 
@@ -533,6 +534,10 @@ export default Vue.extend({
         searchFieldClasses.push("extended__multiselect-input--trigger-option");
       }
 
+      if (this.searchPlaceholderPreserving) {
+        searchFieldClasses.push("extended__multiselect-input--preserved");
+      }
+
       searchFieldClasses.push(mainClass);
       
       return searchFieldClasses;
@@ -545,7 +550,9 @@ export default Vue.extend({
      * @returns {boolean} display
      */
     searchFieldForwarding() {
-      return this.searchFieldFocused || this.optionWillBeTriggered;
+      return this.searchFieldFocused 
+        || this.optionWillBeTriggered 
+        || this.searchFieldPreserving;
     },
   },
 });

@@ -352,11 +352,13 @@ export default {
      * Selects option 
      * @method
      * @emits extended:deselect-option
+     * @emits extended:preserve-search-field
      * @param {UnionPropType} option - option to select
      * @param {MouseEvent|KeyboardEvent} clickEvent - MouseEvent or KeyboardEvent instance
      */
     selectOption(option, clickEvent) {
       this.emitter.$emit("extended:trigger-selection", false);
+      this.emitter.$emit("extended:preserve-search-field", false);
 
       if (!clickEvent) return;
       if (this.keyBlocker(clickEvent)) return;
@@ -453,11 +455,14 @@ export default {
      * to search field before option selection
      * @method
      * @emits extended:trigger-selection
+     * @emits extended:preserve-search-field
      */
     triggerOptionBeforeSelection() {
       if (this.fieldWasShown) {
         this.emitter.$emit("extended:trigger-selection", true);
       }
+
+      this.emitter.$emit("extended:preserve-search-field", true);
     },
 
     /**

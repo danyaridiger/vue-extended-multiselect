@@ -69,7 +69,7 @@
 .extended__multiselect-slate-blue .extended__multiselect-increaser:active {
   border-color: var(--dark-slate-blue);
 }
-  
+
 .extended__multiselect-teal,
 .extended__multiselect-teal .extended__multiselect-increaser:active {
   border-color: var(--teal);
@@ -105,11 +105,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.extended__multiselect-options > *:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]),
-.extended__multiselect-options-slate-grey > *:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]),
-.extended__multiselect-options-slate-blue > *:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]),
-.extended__multiselect-options-teal > *:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]),
-.extended__multiselect-options-strict > *:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]) {
+.extended__multiselect-options>*:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]),
+.extended__multiselect-options-slate-grey>*:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]),
+.extended__multiselect-options-slate-blue>*:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]),
+.extended__multiselect-options-teal>*:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]),
+.extended__multiselect-options-strict>*:not([class^=extended__multiselect-options_option]):not([class=extended__multiselect-options_container]) {
   padding: var(--root-padding);
 }
 
@@ -120,7 +120,7 @@
   border-bottom-left-radius: 0;
   border-top: var(--border);
 }
-    
+
 .extended__multiselect-clear--active {
   grid-template-columns: var(--grid-columns);
 }
@@ -128,7 +128,7 @@
 .extended__multiselect-clear--locked {
   grid-template-columns: var(--grid-rows);
 }
-  
+
 .extended__multiselect,
 .extended__multiselect-options {
   border-color: var(--basic-color);
@@ -156,13 +156,12 @@
 
 .extended__multiselect-input,
 .extended__multiselect-block {
-  min-height: var(--min-block-height);
   width: var(--max-size);
   border: none;
   outline: none;
 }
 
-.extended__multiselect-block > span {
+.extended__multiselect-block>span {
   word-break: break-all;
   white-space: pre-line;
 }
@@ -170,24 +169,23 @@
 .extended__multiselect-input {
   cursor: text;
   color: inherit;
+  min-height: var(--min-block-height);
 }
 
-.extended__multiselect-input:focus::placeholder {
+.extended__multiselect-input:focus::placeholder,
+.extended__multiselect-input--trigger-option::placeholder,
+.extended__multiselect-input--preserved::placeholder {
   color: var(--strict);
   font-weight: var(--wide-text);
 }
 
-.extended__multiselect-input--trigger-option::placeholder {
-  color: var(--strict);
-  font-weight: var(--wide-text);
-}
-      
 .extended__multiselect-block {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   user-select: none;
   color: inherit;
+  max-height: var(--min-block-height);
 }
 
 .extended__multiselect-input--hidden {
@@ -199,7 +197,7 @@
   opacity: 0;
   padding: 0;
 }
-    
+
 .extended__multiselect-toggle,
 .extended__multiselect-toggle--disabled,
 .extended__multiselect-cancel,
@@ -288,7 +286,7 @@
   padding: var(--cancel-padding);
 }
 
-.extended__multiselect-cancel:active  {
+.extended__multiselect-cancel:active {
   border-color: var(--cancel);
   border-radius: var(--border-radius-small);
   background-color: var(--cancel-backgound-color);
@@ -419,8 +417,8 @@
   border-color: transparent;
 }
 
-.extended__multiselect-container + .extended__multiselect-options--marker > span:not([id^=option-label]),
-.extended__multiselect-container + .extended__multiselect-options--marker > .extended__multiselect-option-create {
+.extended__multiselect-container+.extended__multiselect-options--marker>span:not([id^=option-label]),
+.extended__multiselect-container+.extended__multiselect-options--marker>.extended__multiselect-option-create {
   padding-left: 30px;
 }
 
@@ -435,7 +433,7 @@
   height: var(--icon-size-block);
 }
 
-.extended__multiselect-block--multiple > div {
+.extended__multiselect-block--multiple>div {
   display: flex;
   flex-flow: row wrap;
   gap: var(--outer-gap);

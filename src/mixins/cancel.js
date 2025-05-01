@@ -14,7 +14,7 @@ export default {
      * @emits extended:clean-options
      */
     cancel() {
-      if (this.disabled) return;
+      if (this.disabled || this.loading) return;
       
       this.emitter.$emit("extended:skip-block-blur-zeroing");
       this.emitter.$emit("extended:deselect-option", null, true);
