@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.5.8**
+Current vue-extended-multiselect version: **0.5.9**
 
 ***
 
@@ -138,3 +138,7 @@ Current vue-extended-multiselect version: **0.5.8**
 
 * Fixing bug with search field flickering when selecting an option if some option was selected.
 * Fixing bug with the generation of a layout shift that occurred when automatically calculating the height of the options block.
+
+### 0.5.9 (2025-05-01)
+
+* Fixing bug with incorrect multiple option blocks height.
