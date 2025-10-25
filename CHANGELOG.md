@@ -148,7 +148,7 @@ Current vue-extended-multiselect version: **0.5.10**
 - Adding "ISSUE_TEMPLATE" folder with feedback config files.
 - Updating dependencies and dev-dependencies.
 
-### 1.0.0+fix.1 (2025-10-25)
+### 1.0.0 (2025-10-25)
 
 - Added "@babel/eslint-parser", "@commitlint/cli", "@commitlint/config-conventional",
   "jest-environment-jsdom", "eslint-config-prettier", "eslint-plugin-jest",
@@ -177,3 +177,7 @@ Current vue-extended-multiselect version: **0.5.10**
 - Removed explicit installation of "core-js" dependency.
 - Removed unnecessary "iconFilter" prop in ExtendedMultiselectLoader component.
 - Renamed "typings" directory to "types" and type declaration file to "index.d.ts".
+
+### 1.0.1 (2025-10-25)
+
+- Fixed output files configuration in package.json file.
