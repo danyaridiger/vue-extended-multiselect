@@ -12,7 +12,7 @@ export default {
      */
     expand() {
       if (this.disabled) return;
-      
+
       this.searchFieldFocused = true;
       this.emitter.$emit("extended:expand-options");
     },
@@ -28,7 +28,7 @@ export default {
         return;
       }
     },
-  
+
     /**
      * Rolls up options list if it needed
      * @method
@@ -49,7 +49,7 @@ export default {
         this.blurSkipByToggleIcon = 0;
         return;
       }
-  
+
       if (this.blurSkipByBlock > 0) {
         this.blurSkipByBlock = 0;
         return;
@@ -79,7 +79,7 @@ export default {
         this.singleLabel = option.label;
       }
     },
-    
+
     /**
      * Activates debounced version of options list filter
      * @method
@@ -91,26 +91,23 @@ export default {
     /**
      * @see {@linkcode VuexActions}
      */
-    ...mapActions([
-      "setSearchValue",
-      "setSearchPattern"
-    ]),
+    ...mapActions(["setSearchValue", "setSearchPattern"]),
   },
-  
+
   watch: {
     searchFieldForwarding: {
       /**
        * Determines whether option shall be triggered before selection
        * @function
        * @emits extended:renew-field-forwarding
-       * @param {boolean} searchFieldForwarding - restrictor of triggered option 
+       * @param {boolean} searchFieldForwarding - restrictor of triggered option
        */
       handler(value) {
         if (value && this.autoSelectSearchValue && !this.multiple && this.singleLabel) {
           this.searchValue = this.singleLabel;
         }
         this.emitter.$emit("extended:renew-field-forwarding", value);
-      }
+      },
     },
 
     searchPattern: {
@@ -169,13 +166,12 @@ export default {
     this.emitter.$on("extended:rollup-options", (internalRollup) => {
       if (this.blurSkip === true) {
         this.blurSkip = false;
+
         return;
       }
 
-      if (internalRollup) {
-        return;
-      }
-      
+      if (internalRollup) return;
+
       this.rollUp();
     });
 
@@ -219,6 +215,7 @@ export default {
       if (!this.toggleOptionsBySelect) {
         this.searchFieldFocused = false;
       }
+
       this.optionWillBeTriggered = triggerState;
     });
 

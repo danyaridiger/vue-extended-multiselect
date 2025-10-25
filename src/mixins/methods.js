@@ -13,9 +13,11 @@ export default {
      * @emits active
      */
     activeEmitter() {
-      const eventData = this.simpleEvents ? null : {
-        inputId: this.inputId,
-      };
+      const eventData = this.simpleEvents
+        ? null
+        : {
+            inputId: this.inputId,
+          };
 
       /**
        * @event active
@@ -31,9 +33,9 @@ export default {
      * @emits close
      */
     closeEmitter() {
-      const eventData = this.simpleEvents 
-       ? this.selectedOptions
-       : this.createEventFields(this.selectedOptions, "options");
+      const eventData = this.simpleEvents
+        ? this.selectedOptions
+        : this.createEventFields(this.selectedOptions, "options");
 
       /**
        * @event close
@@ -81,14 +83,17 @@ export default {
 
       const customFilteredCancel = this.toggleCustomRestrictor(mouseEvent, 2);
       const customFilteredSelf = this.toggleCustomRestrictor(mouseEvent, 1);
-      const filteredHasCancel = this.toggleDetector(mouseEvent, /^extended__multiselect-cancel_wrapper/i);
+      const filteredHasCancel = this.toggleDetector(
+        mouseEvent,
+        /^extended__multiselect-cancel_wrapper/i,
+      );
       const filteredHasToggle = this.toggleDetector(mouseEvent, togglePattern);
 
       if (customFilteredCancel) return;
       if (customFilteredSelf && this.dropdownActive === false) return;
       if (filteredHasCancel.length) return;
       if (filteredHasToggle.length && this.dropdownActive === false) return;
-      
+
       this.emitter.$emit("extended:field-focus");
     },
 
@@ -100,8 +105,9 @@ export default {
      */
     loadOptionsByExternalLoader(pattern, initialValue) {
       this.externalOptionsLoader = this.options;
-      this.options(pattern).then(options => {
+      this.options(pattern).then((options) => {
         this.rawOptions = options;
+
         if (initialValue) this.setPreselectedOptionsByConditions();
       });
     },
@@ -179,18 +185,22 @@ export default {
       });
 
       if (!availableOptionType) return;
+
       if (
-        (!this.mappedOptions.includes(JSON.stringify(preselectedOption)) && restriction)
-        && !mappedSelectedOptions.includes(JSON.stringify(preselectedOption))
+        !this.mappedOptions.includes(JSON.stringify(preselectedOption)) &&
+        restriction &&
+        !mappedSelectedOptions.includes(JSON.stringify(preselectedOption))
       ) {
         if (this.showInsertWarnings) {
-          console.warn("vue-extended-multiselect: option in «preselectedOption» property should be the same as analogue in «options» property");
+          console.warn(
+            "vue-extended-multiselect: option in «preselectedOption» property should be the same as analogue in «options» property",
+          );
         }
 
         return;
       }
 
-      const isObjectOrArray = typeof preselectedOption === "object";
+      const isObjectOrArray = preselectedOption && typeof preselectedOption === "object";
       const label = this.createLabel(isObjectOrArray, preselectedOption);
 
       this.emitter.$emit("extended:preselect-option", {
@@ -200,7 +210,7 @@ export default {
     },
 
     /**
-     * Sets preselected options provided by "preselectedOptions" prop 
+     * Sets preselected options provided by "preselectedOptions" prop
      * if "multiple" prop equals true
      * @method
      * @emits extended:preselect-option
@@ -215,15 +225,18 @@ export default {
 
       preselectedOptions.forEach((preselectedOption) => {
         const availableOptionType = this.optionTypeRestrictor(preselectedOption);
-        
+
         if (!preselectedOption || !availableOptionType) return;
+
         if (this.selectedOptions.includes(preselectedOption)) return;
 
         if (
-          (this.mappedOptions.includes(JSON.stringify(preselectedOption)) || !restriction)
-           && !mappedSelectedOptions.includes(JSON.stringify(preselectedOption))
+          (this.mappedOptions.includes(JSON.stringify(preselectedOption)) ||
+            !restriction) &&
+          !mappedSelectedOptions.includes(JSON.stringify(preselectedOption))
         ) {
-          const isObjectOrArray = typeof option === "object";
+          const isObjectOrArray =
+            preselectedOption && typeof preselectedOption === "object";
           const label = this.createLabel(isObjectOrArray, preselectedOption);
 
           allOptionsWereSelected++;
@@ -235,8 +248,13 @@ export default {
         }
       });
 
-      if (allOptionsWereSelected !== preselectedOptions.length && this.showInsertWarnings) {
-        console.warn("vue-extended-multiselect: options in «preselectedOptions» property should be the same as analogues in «options» property");
+      if (
+        allOptionsWereSelected !== preselectedOptions.length &&
+        this.showInsertWarnings
+      ) {
+        console.warn(
+          "vue-extended-multiselect: options in «preselectedOptions» property should be the same as analogues in «options» property",
+        );
       }
     },
 
@@ -265,13 +283,17 @@ export default {
       if (withRemoval) {
         this.updateModelValue();
 
-        this.selectedOptionsWatcher = this.$watch("selectedOptions", () => {
-          this.updateModelValue();
-      
-          if (this.resetSearchByValue) {
-            this.emitter.$emit("extended:clear-field");
-          }
-        }, { deep: true });
+        this.selectedOptionsWatcher = this.$watch(
+          "selectedOptions",
+          () => {
+            this.updateModelValue();
+
+            if (this.resetSearchByValue) {
+              this.emitter.$emit("extended:clear-field");
+            }
+          },
+          { deep: true },
+        );
       }
     },
 
@@ -288,7 +310,7 @@ export default {
           this.updateModelValue();
         }
       }
-    
+
       if (!!this.preselectedOptions.length && this.multiple) {
         const initialLength = this.selectedOptions.length;
 
@@ -299,7 +321,7 @@ export default {
         }
       }
     },
-    
+
     /**
      * Defines a position of dropdown appearance
      * @method
@@ -309,8 +331,9 @@ export default {
       if (!window || !this.$refs.extendedMultiselectOptions) return "under";
 
       const innerHeight = window.innerHeight;
-      const offsetHeight = this.$refs.extendedMultiselectOptions.$el.offsetHeight
-       + this.$refs.extendedMultiselect.offsetHeight;
+      const offsetHeight =
+        this.$refs.extendedMultiselectOptions.$el.offsetHeight +
+        this.$refs.extendedMultiselect.offsetHeight;
       const offsetTop = this.$refs.extendedMultiselect.getBoundingClientRect().y;
       const difference = innerHeight - offsetTop;
 
@@ -327,12 +350,13 @@ export default {
      */
     toggleAppearanceRestrictorActivate() {
       if (this.dropdownActive) {
-        this.chosenToggleAppearanceSide = this.toggleAppearanceSide !== "auto"
-         ? this.toggleAppearanceSide
-         : this.toggleAppearanceRestrictor();
+        this.chosenToggleAppearanceSide =
+          this.toggleAppearanceSide !== "auto"
+            ? this.toggleAppearanceSide
+            : this.toggleAppearanceRestrictor();
       }
     },
-    
+
     /**
      * Restricts toggling of dropdown options list
      * @method
@@ -343,31 +367,46 @@ export default {
     toggleBlockRestrictor(mouseEvent) {
       let generalRestriction;
       let filteredCustomSelf;
-      const filteredHasBlock = this.toggleDetector(mouseEvent, /^extended__multiselect-block/i, true);
-      const filteredHasSlot = this.toggleDetector(mouseEvent, /^extended__multiselect-options(?!_option)/i, true)
-      const filteredSelf = this.toggleDetector(mouseEvent, /^extended__multiselect-clear/i, true);
-          
+      const filteredHasBlock = this.toggleDetector(
+        mouseEvent,
+        /^extended__multiselect-block/i,
+        true,
+      );
+      const filteredHasSlot = this.toggleDetector(
+        mouseEvent,
+        /^extended__multiselect-options(?!_option)/i,
+        true,
+      );
+      const filteredSelf = this.toggleDetector(
+        mouseEvent,
+        /^extended__multiselect-clear/i,
+        true,
+      );
+
       if (filteredSelf.length || filteredHasBlock.length || filteredHasSlot.length) {
         filteredCustomSelf = true;
       } else {
         filteredCustomSelf = this.toggleCustomRestrictor(mouseEvent);
       }
-    
+
       if (this.extendedMultiselectToggle) {
-        generalRestriction = (filteredHasBlock.length && this.dropdownActive && filteredCustomSelf)
-         || (filteredSelf.length && this.dropdownActive && filteredCustomSelf)
-         || (filteredHasSlot.length && this.dropdownActive && filteredCustomSelf);
+        generalRestriction =
+          (filteredHasBlock.length && this.dropdownActive && filteredCustomSelf) ||
+          (filteredSelf.length && this.dropdownActive && filteredCustomSelf) ||
+          (filteredHasSlot.length && this.dropdownActive && filteredCustomSelf);
       } else {
-        generalRestriction = (filteredHasBlock.length && this.dropdownActive)
-         || (filteredSelf.length && this.dropdownActive)
-         || (filteredHasSlot.length && this.dropdownActive);
+        generalRestriction =
+          (filteredHasBlock.length && this.dropdownActive) ||
+          (filteredSelf.length && this.dropdownActive) ||
+          (filteredHasSlot.length && this.dropdownActive);
       }
-      
+
       if (generalRestriction) {
         this.emitter.$emit("extended:skip-block-blur");
+
         return true;
       }
-    
+
       return false;
     },
 
@@ -383,8 +422,8 @@ export default {
       let eventTarget = mouseEvent.target;
       const toggleWrapper = this.$refs.extendedMultiselect;
       const customToggle = toggleWrapper.children[blockType];
-     
-      while(eventTarget) {
+
+      while (eventTarget) {
         if (eventTarget === customToggle) return true;
 
         eventTarget = eventTarget.parentNode;
@@ -404,19 +443,20 @@ export default {
      */
     toggleDetector(mouseEvent, pattern, mode) {
       let target = mouseEvent.target;
+      let filteredHasToggle = Array.prototype.filter.call(
+        target.classList,
+        (className) => {
+          return pattern.test(className) === true;
+        },
+      );
 
-      let filteredHasToggle = Array.prototype.filter.call(target.classList, (className) => {
-        return pattern.test(className) === true;
-      });
-
-      while(
-        target
-        && (target.classList 
-          && !target.classList.contains("extended__multiselect-wrapper")
-          || target.classList 
-          && !target.classList.length)
-        && mode
-        && !filteredHasToggle.length
+      while (
+        target &&
+        ((target.classList &&
+          !target.classList.contains("extended__multiselect-wrapper")) ||
+          (target.classList && !target.classList.length)) &&
+        mode &&
+        !filteredHasToggle.length
       ) {
         filteredHasToggle = Array.prototype.filter.call(target.classList, (className) => {
           return pattern.test(className) === true;
@@ -424,11 +464,13 @@ export default {
 
         if (target.classList.contains("extended__multiselect-options_container")) {
           filteredHasToggle.push("extended__multiselect-options_container");
+
           return filteredHasToggle;
         }
 
         if (target.classList.contains("extended__multiselect-toggle_wrapper")) {
           filteredHasToggle.push("extended__multiselect-toggle_wrapper");
+
           return filteredHasToggle;
         }
 
@@ -464,13 +506,13 @@ export default {
      * by selecting/deselecting option
      * @method
      * @param {MouseEvent} mouseEvent - MouseEvent instance
-     * @returns {boolean} restriction 
+     * @returns {boolean} restriction
      */
     toggleOptionsRestrictor(mouseEvent) {
       let eventTarget = mouseEvent.target;
       const optionsWrapper = this.$refs.optionsWrapper;
 
-      while(eventTarget) {
+      while (eventTarget) {
         if (eventTarget === optionsWrapper) return true;
 
         eventTarget = eventTarget.parentNode;
@@ -496,13 +538,12 @@ export default {
       const filteredHasToggle = this.toggleDetector(mouseEvent, togglePattern);
 
       if (filteredHasToggle.length && this.dropdownActive) {
-
         this.emitter.$emit("extended:skip-blur");
       }
     },
 
     /**
-     * Triggers modelValue updating when v-model has 
+     * Triggers modelValue updating when v-model has
      * been changed programmatically
      * @method
      * @emits update:modelValue
@@ -569,14 +610,18 @@ export default {
    * @listens extended:search-pattern-changed
    */
   created() {
-    this.selectedOptionsWatcher = this.$watch("selectedOptions", (value) => {
-      this.updateModelValue();
+    this.selectedOptionsWatcher = this.$watch(
+      "selectedOptions",
+      () => {
+        this.updateModelValue();
 
-      if (this.resetSearchByValue) {
-        this.emitter.$emit("extended:clear-field");
-      }
-    }, { deep: true });
-    
+        if (this.resetSearchByValue) {
+          this.emitter.$emit("extended:clear-field");
+        }
+      },
+      { deep: true },
+    );
+
     this.chosenToggleAppearanceSide = this.toggleAppearanceSide;
 
     this.emitter.$on("extended:available-options", () => {
@@ -587,9 +632,9 @@ export default {
 
     this.emitter.$on("extended:expand-options", () => {
       if (this.dropdownActive || this.dropdownDisabled) return;
-      
+
       this.dropdownActive = true;
-      
+
       this.$nextTick(() => {
         this.toggleAppearanceRestrictorActivate();
       });
@@ -600,6 +645,7 @@ export default {
       if (!this.dropdownActive) return;
 
       this.closeEmitter();
+
       this.dropdownActive = false;
     });
 
@@ -608,9 +654,9 @@ export default {
     });
 
     this.emitter.$on("extended:select-option", (option) => {
-      const eventData = this.simpleEvents 
-       ? option.option
-       : this.createEventFields(option.option, "option");
+      const eventData = this.simpleEvents
+        ? option.option
+        : this.createEventFields(option.option, "option");
 
       if (this.multiple) {
         this.selectedOptions.push(option.option);
@@ -638,62 +684,65 @@ export default {
       } else {
         this.selectedOptions = [option.option];
       }
-  
+
       this.updateModelValue();
     });
 
-    this.emitter.$on("extended:deselect-option", (index = null, clearAll, skipNextRemoval) => {
-      if (this.multiple && !clearAll) {
-        const deselectedOption = this.selectedOptions[index];
+    this.emitter.$on(
+      "extended:deselect-option",
+      (index = null, clearAll, skipNextRemoval) => {
+        if (this.multiple && !clearAll) {
+          const deselectedOption = this.selectedOptions[index];
+          const eventData = this.simpleEvents
+            ? deselectedOption
+            : this.createEventFields(deselectedOption, "option");
 
-        const eventData = this.simpleEvents 
-         ? deselectedOption 
-         : this.createEventFields(deselectedOption, "option");
-  
-        /**
-         * @event clean
-         * @type {Object}
-         * @property {string} inputId - id of search field set by "id" prop
-         * @property {UnionPropType} option - just now deselected option
-         */
-        this.$emit("clean", eventData);
+          /**
+           * @event clean
+           * @type {Object}
+           * @property {string} inputId - id of search field set by "id" prop
+           * @property {UnionPropType} option - just now deselected option
+           */
+          this.$emit("clean", eventData);
 
-        if (skipNextRemoval) {
-          this.skipNextRemoval = true;
+          if (skipNextRemoval) {
+            this.skipNextRemoval = true;
+          }
+
+          this.selectedOptions.splice(index, 1);
+          this.updateModelValue();
+
+          return;
+        } else {
+          if (!this.selectedOptions.length) return;
+
+          const eventData = this.simpleEvents
+            ? this.selectedOptions
+            : this.createEventFields(this.selectedOptions, "option");
+
+          /**
+           * @event clean
+           * @type {Object}
+           * @property {string} inputId - id of search field set by "id" prop
+           * @property {UnionPropType} options - just now deselected options
+           */
+          this.$emit("clean", eventData);
+
+          this.selectedOptions = [];
+
+          this.updateModelValue();
         }
 
-        this.selectedOptions.splice(index, 1);
-        this.updateModelValue();
+        if (this.toggleOptionsBySelect) {
+          this.emitter.$emit("extended:rollup-options");
+        }
+      },
+    );
 
-        return;
-      } else {
-        if (!this.selectedOptions.length) return;
-        
-        const eventData = this.simpleEvents
-         ? this.selectedOptions
-         : this.createEventFields(this.selectedOptions, "option");
-
-        /**
-         * @event clean
-         * @type {Object}
-         * @property {string} inputId - id of search field set by "id" prop
-         * @property {UnionPropType} options - just now deselected options
-         */
-        this.$emit("clean", eventData);
-
-        this.selectedOptions = [];
-        this.updateModelValue();
-      }
-
-      if (this.toggleOptionsBySelect) {
-        this.emitter.$emit("extended:rollup-options");
-      }
-    });
-    
     this.emitter.$on("extended:create-option", (createdOption) => {
-      const eventData = this.simpleEvents 
-       ? createdOption 
-       : this.createEventFields(createdOption, "option");
+      const eventData = this.simpleEvents
+        ? createdOption
+        : this.createEventFields(createdOption, "option");
 
       /**
        * @event option-created
@@ -705,7 +754,9 @@ export default {
     });
 
     this.emitter.$on("extended:increase-display", (limit) => {
-      const eventData = this.simpleEvents ? limit : this.createEventFields(limit, "limit");
+      const eventData = this.simpleEvents
+        ? limit
+        : this.createEventFields(limit, "limit");
 
       /**
        * @event increase
@@ -717,9 +768,9 @@ export default {
     });
 
     this.emitter.$on("extended:loader-pattern-changed", (pattern) => {
-      const eventData = this.simpleEvents 
-       ? pattern 
-       : this.createEventFields(pattern, "pattern");
+      const eventData = this.simpleEvents
+        ? pattern
+        : this.createEventFields(pattern, "pattern");
 
       /**
        * @event pattern-changed
@@ -731,9 +782,9 @@ export default {
     });
 
     this.emitter.$on("extended:search-pattern-changed", (pattern) => {
-      const eventData = this.simpleEvents 
-       ? pattern 
-       : this.createEventFields(pattern, "pattern");
+      const eventData = this.simpleEvents
+        ? pattern
+        : this.createEventFields(pattern, "pattern");
 
       /**
        * @event pattern-changed
@@ -756,22 +807,19 @@ export default {
       this.loadOptionsByExternalLoader(null, true);
     } else {
       this.rawOptions = this.options;
+
       this.setPreselectedOptionsByConditions();
     }
 
     this.setPreselectedOptionsByModelValue();
-    
+
     const root = this.$refs.extendedMultiselectWrapper;
-    
+
     this.clickOutside.init(root, () => {
       this.emitter.$emit("extended:rollup-options");
     });
 
-    if (
-      this.defaultExpanded 
-       && !this.disabled
-       && typeof this.options !== "function"
-    ) {
+    if (this.defaultExpanded && !this.disabled && typeof this.options !== "function") {
       this.dropdownActive = true;
 
       this.$nextTick(() => {

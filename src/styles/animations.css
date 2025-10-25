@@ -7,12 +7,12 @@
 .extended-toggle-leave-to {
   opacity: 0;
 }
-  
-  
+
 @keyframes loading {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(2turn);
   }

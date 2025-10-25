@@ -17,7 +17,7 @@
   --strict-transparent: rgba(0, 0, 0, 0.6);
   --teal: #008080;
   --teal-transparent: rgba(0, 128, 128, 0.6);
-  
+
   --block-border-radius: 4px;
   --block-cancel-padding: 4px;
   --block-gap: 6px;
@@ -49,5 +49,5 @@
   --icons-justify-self: center;
   --pointer-cursor: pointer;
   --wrapper-transition: border-top-left-radius 250ms ease 0s, border-top-right-radius 250ms ease 0s,
-                        border-bottom-left-radius 250ms ease-out, border-bottom-right-radius 250ms ease-out;
+    border-bottom-left-radius 250ms ease-out, border-bottom-right-radius 250ms ease-out;
 }

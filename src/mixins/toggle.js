@@ -10,9 +10,9 @@ export default {
      * @returns {string} class
      */
     toggleSlotClass() {
-      return (this.loading || this.internalLoading || this.disabled)
-       ? "extended__multiselect-toggle--disabled"
-       : "extended__multiselect-toggle";
+      return this.loading || this.internalLoading || this.disabled
+        ? "extended__multiselect-toggle--disabled"
+        : "extended__multiselect-toggle";
     },
   },
 
@@ -25,7 +25,7 @@ export default {
      */
     toggleOptionsList(event) {
       if (event && event.code === "Tab") return;
-      
+
       this.emitter.$emit("extended:toggle-options");
     },
   },

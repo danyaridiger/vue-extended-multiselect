@@ -52,7 +52,7 @@ export default new Vuex.Store({
      * @param {Object} state - {@linkcode VuexState}
      * @param {string} pattern - new pattern of inner search for available options
      */
-    "SET_SEARCH_PATTERN"(state, pattern) {
+    SET_SEARCH_PATTERN(state, pattern) {
       state.searchPattern = pattern;
     },
 
@@ -62,11 +62,11 @@ export default new Vuex.Store({
      * @param {Object} state - {@linkcode VuexState}
      * @param {string} value - new value of search field
      */
-    "SET_SEARCH_VALUE"(state, value) {
+    SET_SEARCH_VALUE(state, value) {
       state.searchValue = value;
     },
   },
-  
+
   /**
    * Vuex actions
    * @alias VuexActions
@@ -82,7 +82,7 @@ export default new Vuex.Store({
     setSearchPattern({ commit }, pattern) {
       commit("SET_SEARCH_PATTERN", pattern);
     },
-    
+
     /**
      * Action triggers {@linkcode SET_SEARCH_VALUE} mutation
      * @method

@@ -462,5 +462,9 @@
 
 .extended__multiselect-placeholder {
   color: var(--placeholder);
+  min-height: var(--min-block-height);
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
   margin-left: 2px;
 }

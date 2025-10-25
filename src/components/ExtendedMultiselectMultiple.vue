@@ -1,21 +1,15 @@
 <template>
   <div class="extended__multiselect-block extended__multiselect-block--multiple">
-    <span
-      v-if="placeholderBlockShown"
-      class="extended__multiselect-placeholder"
-    >
+    <div v-if="placeholderBlockShown" class="extended__multiselect-placeholder">
       {{ appropriatePlaceholder }}
-    </span>
+    </div>
     <div>
       <slot
         name="multipleBlocks"
         :selected-options="limitRestriction"
         :deselect-block="deselectBlock"
       >
-        <div
-          v-for="(option, index) in limitRestriction"
-          :key="index"
-        >
+        <div v-for="(option, index) in limitRestriction" :key="index">
           <slot
             name="optionBlock"
             :label="optionCreateLabel(option)"
@@ -24,10 +18,7 @@
           >
             <div :class="classes">
               <span>{{ optionCreateLabel(option) }}</span>
-              <div 
-                :class="deselectClasses"
-                @click.stop="deselectBlock(index)"
-              >
+              <div :class="deselectClasses" @click.stop="deselectBlock(index)">
                 <img
                   alt=""
                   class="extended__multiselect_deselect-block-icon"
@@ -54,10 +45,7 @@
           v-if="optionIncreaserAvailable"
           :show-more-options="showMoreOptions"
         >
-          <div 
-            :class="[classes, increaserClass]"
-            @click.stop="showMoreOptions"
-          >
+          <div :class="[classes, increaserClass]" @click.stop="showMoreOptions">
             Show more options
           </div>
         </slot>
@@ -107,7 +95,7 @@ export default Vue.extend({
     },
 
     /**
-     * Determines whether to show extended multiselect 
+     * Determines whether to show extended multiselect
      * placeholder element
      * @property {boolean} placeholderBlockShown
      */
@@ -129,7 +117,7 @@ export default Vue.extend({
 
     /**
      * Allows to increase limit of displayed selected option blocks
-     * @property {boolean} toggleMultipleBlocksLimit 
+     * @property {boolean} toggleMultipleBlocksLimit
      */
     toggleMultipleBlocksLimit: {
       type: Boolean,
@@ -137,7 +125,7 @@ export default Vue.extend({
     },
 
     /**
-     * Defines placeholder for extended multiselect 
+     * Defines placeholder for extended multiselect
      * placeholder element
      * @property {string} appropriatePlaceholder
      */
@@ -257,9 +245,7 @@ export default Vue.extend({
     classes() {
       const basicClassName = "extended__multiselect--multiple";
 
-      switch(this.themeType) {
-        case "basic":
-          return `${basicClassName}-basic`;
+      switch (this.themeType) {
         case "slate-grey":
           return `${basicClassName}-slate-grey`;
         case "slate-blue":
@@ -268,7 +254,7 @@ export default Vue.extend({
           return `${basicClassName}-teal`;
         case "strict":
           return `${basicClassName}-strict`;
-        default: 
+        default:
           return `${basicClassName}-basic`;
       }
     },
@@ -281,8 +267,8 @@ export default Vue.extend({
      */
     deselectClasses() {
       return this.loading
-       ? "extended__multiselect-block_cancel-wrapper--loading"
-       : "extended__multiselect-block_cancel-wrapper";
+        ? "extended__multiselect-block_cancel-wrapper--loading"
+        : "extended__multiselect-block_cancel-wrapper";
     },
 
     /**
@@ -314,7 +300,10 @@ export default Vue.extend({
      * @returns {boolean} reaching
      */
     optionsLimitAchieved() {
-      return this.optionsLimitIncreaser && this.selectedOptions.length > this.optionsLimitIncreaser;
+      return (
+        this.optionsLimitIncreaser &&
+        this.selectedOptions.length > this.optionsLimitIncreaser
+      );
     },
 
     /**
@@ -340,7 +329,7 @@ export default Vue.extend({
     },
 
     /**
-     * Defines styles for "padding-right" css-property 
+     * Defines styles for "padding-right" css-property
      * of every option block
      * @method
      * @returns {Object|null} styles

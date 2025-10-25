@@ -4,7 +4,7 @@
 export default {
   methods: {
     /**
-     * Deselects option by users click on its element cancel icon 
+     * Deselects option by users click on its element cancel icon
      * if "multiple" prop equals true
      * @method
      * @emits extended:deselect-option
@@ -18,14 +18,14 @@ export default {
 
     /**
      * Shows next hidden options
-     * This behavior restricts by "toggleMultipleBlocksLimit" prop 
+     * This behavior restricts by "toggleMultipleBlocksLimit" prop
      * if "multiple" prop equals true
      * @method
      * @emits extended:increase-display
      */
     showMoreOptions() {
-
       this.optionsLimitIncreaser += this.increaseDisplayBy;
+
       this.emitter.$emit("extended:increase-display", this.optionsLimitIncreaser);
     },
   },

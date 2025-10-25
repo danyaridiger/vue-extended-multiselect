@@ -9,66 +9,31 @@
     @click.stop.middle="toggleOptionsList"
     @keypress.stop="toggleOptionsList($event)"
   >
-    <img
-      alt=""
-      v-if="!loading"
-      :class="classesSummary"
-      :src="icon"
-    />
-    <extended-multiselect-loader 
+    <img alt="" v-if="!loading" :class="classesSummary" :src="icon" />
+    <extended-multiselect-loader
       v-else
       :icon-filter="loaderIconFilter"
       :icon-size="iconSize"
     />
     <svg
-      version="1.1" 
-      xmlns="http://www.w3.org/2000/svg" 
-      xmlns:xlink="http://www.w3.org/1999/xlink" 
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
       width="0"
       height="0"
-    >  
+    >
       <defs>
-        <filter 
-          x="0" 
-          y="0" 
-          width="1" 
-          height="1" 
-          id="basicFilter"
-        >
-          <feFlood flood-color="#BDBDBD"/>
-          <feComposite 
-            out="SourceGraphic" 
-            in2="SourceGraphic" 
-            operator="in" 
-          />
+        <filter x="0" y="0" width="1" height="1" id="basicFilter">
+          <feFlood flood-color="#BDBDBD" />
+          <feComposite out="SourceGraphic" in2="SourceGraphic" operator="in" />
         </filter>
-        <filter 
-          x="0" 
-          y="0" 
-          width="1" 
-          height="1" 
-          id="blackFilter"
-        >
-          <feFlood flood-color="#000000"/>
-          <feComposite 
-            out="SourceGraphic" 
-            in2="SourceGraphic" 
-            operator="in" 
-          />
+        <filter x="0" y="0" width="1" height="1" id="blackFilter">
+          <feFlood flood-color="#000000" />
+          <feComposite out="SourceGraphic" in2="SourceGraphic" operator="in" />
         </filter>
-        <filter 
-          x="0" 
-          y="0" 
-          width="1" 
-          height="1" 
-          id="greenFilter"
-        >
-          <feFlood flood-color="#068504"/>
-          <feComposite 
-            out="SourceGraphic" 
-            in2="SourceGraphic" 
-            operator="in" 
-          />
+        <filter x="0" y="0" width="1" height="1" id="greenFilter">
+          <feFlood flood-color="#068504" />
+          <feComposite out="SourceGraphic" in2="SourceGraphic" operator="in" />
         </filter>
       </defs>
     </svg>
@@ -120,7 +85,7 @@ export default Vue.extend({
      * Defines a svg-filter for icons
      * @property {string} iconFilter
      */
-     iconFilter: {
+    iconFilter: {
       type: String,
       required: true,
     },
@@ -171,7 +136,7 @@ export default Vue.extend({
       required: true,
     },
   },
-  
+
   computed: {
     /**
      * Defines a list of toggle button classes
@@ -179,13 +144,9 @@ export default Vue.extend({
      * @returns {Array} classes
      */
     classesSummary() {
-      return [
-        this.iconFilterClass,
-        this.iconSizeClass,
-        this.iconFilterRotationClass
-      ];
+      return [this.iconFilterClass, this.iconSizeClass, this.iconFilterRotationClass];
     },
-    
+
     /**
      * Determines kind of toggle icon based on
      * "toggleIcon" prop
@@ -195,9 +156,7 @@ export default Vue.extend({
     icon() {
       const baseArrow = require("../assets/base-arrow.svg");
 
-      switch(this.toggleIcon) {
-        case "base-arrow":
-          return baseArrow;
+      switch (this.toggleIcon) {
         case "double-arrow":
           return require("../assets/double-arrow.svg");
         case "wide-arrow":
@@ -210,7 +169,7 @@ export default Vue.extend({
           return require("../assets/triangle-arrow.svg");
         case "triangle-circle-arrow":
           return require("../assets/triangle-circle-arrow.svg");
-        default: 
+        default:
           return baseArrow;
       }
     },
@@ -222,8 +181,8 @@ export default Vue.extend({
      */
     iconFilterClass() {
       const basicFilter = "extended__multiselect-filter";
-      
-      switch(this.iconFilter) {
+
+      switch (this.iconFilter) {
         case "basic":
           return `${basicFilter}_basic`;
         case "black":
@@ -242,9 +201,9 @@ export default Vue.extend({
      * @returns {string} class
      */
     iconFilterRotationClass() {
-      return this.dropdownActive 
-       ? "extended__multiselect-toggle--active" 
-       : "extended__multiselect-toggle--locked";
+      return this.dropdownActive
+        ? "extended__multiselect-toggle--active"
+        : "extended__multiselect-toggle--locked";
     },
 
     /**

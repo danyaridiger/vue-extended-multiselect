@@ -15,10 +15,10 @@ export default {
      */
     cancel() {
       if (this.disabled || this.loading) return;
-      
+
       this.emitter.$emit("extended:skip-block-blur-zeroing");
       this.emitter.$emit("extended:deselect-option", null, true);
-      
+
       if (!this.showSearchField) return;
 
       this.emitter.$emit("extended:clean-options");
@@ -26,13 +26,10 @@ export default {
       this.setSearchValue(null);
       this.setSearchPattern(null);
     },
- 
+
     /**
      * @see {@linkcode VuexActions}
      */
-    ...mapActions([
-      "setSearchValue",
-      "setSearchPattern"
-    ]),
+    ...mapActions(["setSearchValue", "setSearchPattern"]),
   },
 };

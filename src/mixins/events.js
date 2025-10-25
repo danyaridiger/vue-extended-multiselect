@@ -4,9 +4,9 @@ import Vue from "vue";
  * @mixin EventsMixin
  */
 export default {
-    data() {
-        return {
-            emitter: new Vue({}),
-        };
-    },
+  data() {
+    return {
+      emitter: new Vue({}),
+    };
+  },
 };

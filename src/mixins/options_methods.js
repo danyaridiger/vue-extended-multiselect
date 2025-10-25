@@ -1,5 +1,4 @@
 import { mapActions } from "vuex";
-import { UnionPropType } from "../sets/sets";
 
 /**
  * @mixin OptionsMethodsMixin
@@ -7,7 +6,7 @@ import { UnionPropType } from "../sets/sets";
 export default {
   methods: {
     /**
-     * Toggles "border-bottom-right-radius", "border-bottom-right-radius" 
+     * Toggles "border-bottom-right-radius", "border-bottom-right-radius"
      * and "top" css-properties of options wrapper
      * @method
      * @param {boolean} afterLoading - loading state flag
@@ -48,15 +47,16 @@ export default {
       return !this.selectedOptions.find((selectedOption) => {
         let calculatedSelectedOptionLabel;
 
-        if (typeof selectedOption === "object") {
+        if (selectedOption && typeof selectedOption === "object") {
           if (Object.keys(selectedOption).length === 0) {
             calculatedSelectedOptionLabel = this.emptyObjectsPlaceholder;
           } else if (Array.isArray(selectedOption)) {
             calculatedSelectedOptionLabel = selectedOption.join(", ");
           } else {
-            calculatedSelectedOptionLabel = typeof selectedOption[this.label] === "object"
-             ? JSON.stringify(selectedOption[this.label])
-             : selectedOption[this.label].toString();
+            calculatedSelectedOptionLabel =
+              selectedOption[this.label] && typeof selectedOption[this.label] === "object"
+                ? JSON.stringify(selectedOption[this.label])
+                : selectedOption[this.label].toString();
           }
         } else {
           calculatedSelectedOptionLabel = selectedOption.toString();
@@ -77,7 +77,7 @@ export default {
 
       let newOption;
 
-      switch(this.createOptionType) {
+      switch (this.createOptionType) {
         case "primitive":
           newOption = this.searchValue;
           break;
@@ -108,7 +108,9 @@ export default {
     createObjectOption() {
       if (!this.createOptionFields) {
         if (this.showInsertWarnings) {
-          console.warn("vue-extended-multiselect: if option should be object — option fields should not be empty");
+          console.warn(
+            "vue-extended-multiselect: if option should be object — option fields should not be empty",
+          );
         }
 
         return this.searchValue;
@@ -135,7 +137,7 @@ export default {
      * @returns {boolean} prohibition
      */
     defineDisabledOption(option) {
-      if (typeof option === "object" && !Array.isArray(option)) return false;
+      if (option && typeof option === "object" && !Array.isArray(option)) return false;
 
       let convertedOption;
       if (Array.isArray(option) && !option.length) {
@@ -157,9 +159,11 @@ export default {
      */
     filterBySearchPattern(optionsList) {
       return optionsList.filter((option) => {
-        if (typeof option === "object") {
+        if (option && typeof option === "object") {
           if (Array.isArray(option)) {
-            return this.searchPattern.test(option.length ? option.join(", ") : this.emptyObjectsPlaceholder);
+            return this.searchPattern.test(
+              option.length ? option.join(", ") : this.emptyObjectsPlaceholder,
+            );
           }
 
           let internalSearchResult;
@@ -208,7 +212,7 @@ export default {
      * @returns {boolean} selected
      */
     lookForObjectOptions(option) {
-      if (typeof option === "object") {
+      if (option && typeof option === "object") {
         let calculatedOptionLabel;
 
         if (Array.isArray(option) && !!option.length) {
@@ -217,9 +221,10 @@ export default {
           const hasLabel = Object.getOwnPropertyNames(option).includes(this.label);
 
           if (hasLabel) {
-            calculatedOptionLabel = typeof option[this.label] === "object" 
-             ? JSON.stringify(option[this.label]) 
-             : option[this.label].toString();
+            calculatedOptionLabel =
+              option[this.label] && typeof option[this.label] === "object"
+                ? JSON.stringify(option[this.label])
+                : option[this.label].toString();
           } else {
             calculatedOptionLabel = JSON.stringify(option);
           }
@@ -243,9 +248,13 @@ export default {
      * @returns {boolean} selected
      */
     lookForSimpleOptions(option) {
-      if (typeof option === "object" && Object.keys(option).length === 0) {
+      if (option && typeof option === "object" && Object.keys(option).length === 0) {
         const emptyObject = this.selectedOptions.find((emptyObject) => {
-          return typeof emptyObject === "object" && !Object.keys(emptyObject).length;
+          return (
+            emptyObject &&
+            typeof emptyObject === "object" &&
+            !Object.keys(emptyObject).length
+          );
         });
 
         if (!emptyObject || this.selectedOptionsShown) return true;
@@ -254,10 +263,12 @@ export default {
       }
 
       if (
-        typeof option === "object"
-         && !Array.isArray(option)
-         && !Object.keys(option).includes(this.label)
-      ) return false;
+        option &&
+        typeof option === "object" &&
+        !Array.isArray(option) &&
+        !Object.keys(option).includes(this.label)
+      )
+        return false;
 
       return true;
     },
@@ -312,10 +323,7 @@ export default {
       let theme = [];
 
       if (this.highlightOptions) {
-        switch(this.themeType) {
-          case "basic":
-            theme.push("extended__multiselect-options_option");
-            break;
+        switch (this.themeType) {
           case "slate-grey":
             theme.push("extended__multiselect-options_option-slate-grey");
             break;
@@ -328,7 +336,7 @@ export default {
           case "strict":
             theme.push("extended__multiselect-options_option-strict");
             break;
-          default: 
+          default:
             theme.push("extended__multiselect-options_option");
         }
       }
@@ -341,7 +349,11 @@ export default {
         theme.push("extended__multiselect-options_option--disabled");
       }
 
-      if (this.disabledPrimitiveOptionsConverted && option && this.defineDisabledOption(option)) {
+      if (
+        this.disabledPrimitiveOptionsConverted &&
+        option &&
+        this.defineDisabledOption(option)
+      ) {
         theme.push("extended__multiselect-options_option--disabled");
       }
 
@@ -349,7 +361,7 @@ export default {
     },
 
     /**
-     * Selects option 
+     * Selects option
      * @method
      * @emits extended:deselect-option
      * @emits extended:preserve-search-field
@@ -366,11 +378,15 @@ export default {
       if (this.maxOptionsWereSelected) return;
       if (option[this.disableByField] || this.defineDisabledOption(option)) return;
       if (
-        clickEvent.target.classList && (clickEvent.target.classList.contains("extended__multiselect-toggle")
-         || clickEvent.target.classList.contains("extended__multiselect-toggle--disabled")
-         || clickEvent.target.classList.contains("extended__multiselect-cancel")
-         || clickEvent.target.classList.contains("extended__multiselect-cancel--disabled"))
-      ) return; 
+        clickEvent.target.classList &&
+        (clickEvent.target.classList.contains("extended__multiselect-toggle") ||
+          clickEvent.target.classList.contains(
+            "extended__multiselect-toggle--disabled",
+          ) ||
+          clickEvent.target.classList.contains("extended__multiselect-cancel") ||
+          clickEvent.target.classList.contains("extended__multiselect-cancel--disabled"))
+      )
+        return;
 
       if (this.selectedOptionsShown || this.externalOptionsLoader) {
         const optionDeselected = this.lookForObjectOptions(option);
@@ -379,14 +395,14 @@ export default {
           const index = this.selectedOptions.findIndex((selectedOption) => {
             return JSON.stringify(selectedOption) === JSON.stringify(option);
           });
-    
-          this.emitter.$emit("extended:deselect-option", null, false, true);
-          
+
+          this.emitter.$emit("extended:deselect-option", index, false, true);
+
           return;
         }
       }
 
-      const isObject = typeof option === "object" && !Array.isArray(option);
+      const isObject = option && typeof option === "object" && !Array.isArray(option);
 
       if (isObject && !Object.keys(option).includes(this.label)) {
         if (this.showInsertWarnings) {
@@ -406,9 +422,9 @@ export default {
      * @param {UnionPropType} - option to select
      */
     selectOptionEmitter(option) {
-      const isObjectOrArray = typeof option === "object";
+      const isObjectOrArray = option && typeof option === "object";
       const label = this.createLabel(isObjectOrArray, option);
-      
+
       if (this.multiple) {
         if (this.clearBySelectWhenMultiple) {
           this.emitter.$emit("extended:clear-field");
@@ -468,15 +484,12 @@ export default {
     /**
      * @see {@linkcode VuexActions}
      */
-    ...mapActions([
-      "setSearchValue",
-      "setSearchPattern"
-    ]),
+    ...mapActions(["setSearchValue", "setSearchPattern"]),
   },
 
   watch: {
     /**
-     * Triggers appearance side restrictor to set a position 
+     * Triggers appearance side restrictor to set a position
      * of dropdown appearance
      * @function
      * @emits extended:available-options
@@ -497,17 +510,25 @@ export default {
     const objectFields = this.restrictedOptions.filter((option) => {
       if (!option) return false;
 
-      return typeof option === "object" && typeof option[this.label] === "object";
+      return (
+        option &&
+        typeof option === "object" &&
+        option[this.label] &&
+        typeof option[this.label] === "object"
+      );
     });
 
     if (objectFields.length && this.showInsertWarnings) {
-      console.warn("vue-extended-multiselect: «label» property can not be of type «object»");
+      console.warn(
+        "vue-extended-multiselect: «label» property can not be of type «object»",
+      );
     }
 
     this.emitter.$on("extended:select-enter", (keyboardEvent) => {
       if (!this.enterIndex) return;
 
       const option = this.availableOptions[this.enterIndex];
+
       this.selectOption(option, keyboardEvent);
     });
 

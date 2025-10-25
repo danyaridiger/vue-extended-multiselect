@@ -24,19 +24,13 @@
       v-show="!searchFieldForwarding && !multiple && !placeholderBlockShown"
       @click="expand"
     >
-      <slot
-        name="labelBlock"
-        :label-block-value="singleLabel"
-      >
+      <slot name="labelBlock" :label-block-value="singleLabel">
         <span>{{ singleLabel }}</span>
       </slot>
     </div>
-    <span
-      v-if="placeholderBlockShown"
-      class="extended__multiselect-placeholder"
-    >
+    <div v-if="placeholderBlockShown" class="extended__multiselect-placeholder">
       {{ appropriatePlaceholder }}
-    </span>
+    </div>
     <extended-multiselect-multiple
       v-show="multiple && !!selectedOptions.length"
       :style="multipleBlocksMargin"
@@ -72,7 +66,7 @@
         v-if="$scopedSlots.optionBlock"
         #optionBlock="{ label, deselectBlock, index }"
       >
-        <slot 
+        <slot
           name="optionBlock"
           :label="label"
           :index="index"
@@ -80,21 +74,14 @@
         >
         </slot>
       </template>
-      <template
-        v-if="$slots.maxElements"
-        #maxElements
-      >
+      <template v-if="$slots.maxElements" #maxElements>
         <slot name="maxElements"></slot>
       </template>
       <template
         v-if="$scopedSlots.showMore && toggleMultipleBlocksLimit"
         #showMore="{ showMoreOptions }"
       >
-        <slot 
-          name="showMore"
-          :show-more-options="showMoreOptions"
-        >
-        </slot>
+        <slot name="showMore" :show-more-options="showMoreOptions"> </slot>
       </template>
     </extended-multiselect-multiple>
   </div>
@@ -130,7 +117,7 @@
         v-if="$scopedSlots.optionBlock"
         #optionBlock="{ label, deselectBlock, index }"
       >
-        <slot 
+        <slot
           name="optionBlock"
           :label="label"
           :index="index"
@@ -142,10 +129,7 @@
         v-if="$scopedSlots.showMore && toggleMultipleBlocksLimit"
         #showMore="{ showMoreOptions }"
       >
-        <slot 
-          name="showMore"
-          :show-more-options="showMoreOptions"
-        ></slot>
+        <slot name="showMore" :show-more-options="showMoreOptions"></slot>
       </template>
     </extended-multiselect-multiple>
     <input
@@ -156,20 +140,11 @@
       @focus.prevent="expand"
     />
   </div>
-  <div
-    class="extended__multiselect-block"
-    v-else
-  >
-    <span
-      v-if="hintBlockShown"
-      class="extended__multiselect-placeholder"
-    >
+  <div class="extended__multiselect-block" v-else>
+    <div v-if="hintBlockShown" class="extended__multiselect-placeholder">
       {{ appropriatePlaceholder }}
-    </span>
-    <slot
-      name="labelBlock"
-      :label-block-value="singleLabel"
-    >
+    </div>
+    <slot name="labelBlock" :label-block-value="singleLabel">
       <span>{{ singleLabel }}</span>
     </slot>
     <input
@@ -232,7 +207,7 @@ export default Vue.extend({
       type: Boolean,
       required: true,
     },
-    
+
     /**
      * Provides "loading" state of component
      * to ExtendedMultiselectMultiple child component
@@ -242,9 +217,9 @@ export default Vue.extend({
       type: Boolean,
       required: true,
     },
-    
+
     /**
-     * Determines whether to use ExtendedMultiselectMultiple 
+     * Determines whether to use ExtendedMultiselectMultiple
      * child component and some other related functionality
      * @property {boolean} multiple
      */
@@ -283,7 +258,7 @@ export default Vue.extend({
     },
 
     /**
-     * Determines whether to allow user to increase limit of shown 
+     * Determines whether to allow user to increase limit of shown
      * elements with selected options by special icon
      * @property {boolean} toggleMultipleBlocksLimit
      */
@@ -358,7 +333,7 @@ export default Vue.extend({
       type: String,
       required: true,
     },
-    
+
     /**
      * Provides current theme of extended multiselect
      * to ExtendedMultiselectMultiple child component
@@ -410,7 +385,7 @@ export default Vue.extend({
 
     /**
      * Provides function that creates custom label for
-     * block with selected option to ExtendedMultiselectMultiple 
+     * block with selected option to ExtendedMultiselectMultiple
      * child component
      * @property {Function} createCustomOptionLabel
      */
@@ -443,7 +418,7 @@ export default Vue.extend({
     /**
      * "id" attribute of search field
      * @default null
-     * @property {string|number} inputId
+     * @property {string|number|null} inputId
      */
     inputId: {
       type: [String, Number],
@@ -454,7 +429,6 @@ export default Vue.extend({
   data() {
     return {
       blurSkip: false,
-      reversePrevented: false,
       searchFieldFocused: false,
       optionWillBeTriggered: false,
       searchFieldPreserving: false,
@@ -464,7 +438,9 @@ export default Vue.extend({
       blurSkipByToggleIcon: 0,
       blurSkipByBlock: 0,
       searchDebounce: new Debounce(() => {
-        const searchPattern = this.searchValue ? new RegExp(`${this.searchValue}`, "i") : null;
+        const searchPattern = this.searchValue
+          ? new RegExp(`${this.searchValue}`, "i")
+          : null;
 
         if (this.externalOptionsLoader) {
           this.emitter.$emit("extended:loader-pattern-changed", this.searchValue);
@@ -525,9 +501,9 @@ export default Vue.extend({
      * @returns {Array} classes
      */
     searchFieldClass() {
-      const mainClass = this.searchFieldForwarding 
-       ? "extended__multiselect-input"
-       : "extended__multiselect-input--hidden";
+      const mainClass = this.searchFieldForwarding
+        ? "extended__multiselect-input"
+        : "extended__multiselect-input--hidden";
       const searchFieldClasses = [];
 
       if (this.optionWillBeTriggered) {
@@ -539,7 +515,7 @@ export default Vue.extend({
       }
 
       searchFieldClasses.push(mainClass);
-      
+
       return searchFieldClasses;
     },
 
@@ -550,9 +526,11 @@ export default Vue.extend({
      * @returns {boolean} display
      */
     searchFieldForwarding() {
-      return this.searchFieldFocused 
-        || this.optionWillBeTriggered 
-        || this.searchFieldPreserving;
+      return (
+        this.searchFieldFocused ||
+        this.optionWillBeTriggered ||
+        this.searchFieldPreserving
+      );
     },
   },
 });

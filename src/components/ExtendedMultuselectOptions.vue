@@ -1,10 +1,5 @@
 <template>
-  <div
-    ref="optionsWrapper"
-    tabindex="-1"
-    :class="classes"
-    :style="styles"
-  >
+  <div ref="optionsWrapper" tabindex="-1" :class="classes" :style="styles">
     <slot name="listHeader"></slot>
     <div
       v-if="showCreateNewOptionBlock"
@@ -13,24 +8,14 @@
     >
       {{ searchValue }}
     </div>
-    <slot
-      name="moreThanLimit"
-      v-if="maxOptionsWereSelected"
-    >
+    <slot name="moreThanLimit" v-if="maxOptionsWereSelected">
       <span>Maximum limit of selected options was achieved</span>
     </slot>
-    <slot
-      name="lessThanLimit"
-      v-if="minOptionsWereNotSelected"
-    >
+    <slot name="lessThanLimit" v-if="minOptionsWereNotSelected">
       <span>Minimum amount of selected options was not achieved</span>
     </slot>
     <div class="extended__multiselect-options_container">
-      <div
-        role="listbox"
-        v-for="(option, index) in availableOptions"
-        :key="index"
-      >
+      <div role="listbox" v-for="(option, index) in availableOptions" :key="index">
         <div
           v-if="option"
           :aria-setsize="availableOptions.length"
@@ -47,20 +32,15 @@
           @mouseenter.stop="setEnterIndex"
         >
           <div class="extended__multiselect-marker">
-            <slot 
-              name="marker"
-              :selected="showCurrentMarker(option)"
-            >
+            <slot name="marker" :selected="showCurrentMarker(option)">
               <div
                 v-if="showMarker && showCurrentMarker(option)"
                 :class="markerShapeClass(option)"
-              >
-              </div>
-              <div 
+              ></div>
+              <div
                 v-else-if="showMarker"
                 class="extended__multiselect-marker-shape-only"
-              >
-              </div>
+              ></div>
             </slot>
           </div>
           <slot
@@ -75,16 +55,10 @@
         </div>
       </div>
     </div>
-    <slot
-      name="noResults"
-      v-if="emptySearchResult"
-    >
+    <slot name="noResults" v-if="emptySearchResult">
       <span>No results were found by search</span>
     </slot>
-    <slot
-      name="noOptions"
-      v-if="emptyOptionsList"
-    >
+    <slot name="noOptions" v-if="emptyOptionsList">
       <span>Options list is empty</span>
     </slot>
     <slot name="listFooter"></slot>
@@ -341,7 +315,7 @@ export default Vue.extend({
       type: Array,
       required: true,
     },
-    
+
     /**
      * List of options which should be selected by default
      * if "multiple" prop equals true
@@ -457,7 +431,7 @@ export default Vue.extend({
         if (!this.lookForSimpleOptions(option)) return false;
 
         if (this.selectedOptionsShown) return true;
-          
+
         return this.lookForObjectOptions(option);
       });
 
@@ -478,10 +452,7 @@ export default Vue.extend({
     classes() {
       let theme = [];
 
-      switch(this.themeType) {
-        case "basic":
-          theme.push("extended__multiselect-options");
-          break;
+      switch (this.themeType) {
         case "slate-grey":
           theme.push("extended__multiselect-options-slate-grey");
           break;
@@ -515,8 +486,12 @@ export default Vue.extend({
      * @returns {boolean} emptiness
      */
     emptyOptionsList() {
-      return (!this.options.length || !this.options.filter((option) => !!option).length
-       || !this.availableOptions.length) && !this.searchValue;
+      return (
+        (!this.options.length ||
+          !this.options.filter((option) => !!option).length ||
+          !this.availableOptions.length) &&
+        !this.searchValue
+      );
     },
 
     /**
@@ -536,7 +511,7 @@ export default Vue.extend({
      */
     heightFromProps() {
       let heightRecord = {};
-      
+
       if (this.chosenToggleAppearanceSide === "atop") {
         Object.defineProperty(heightRecord, "top", {
           enumerable: true,
@@ -552,8 +527,10 @@ export default Vue.extend({
       if (this.toggleMinHeight) {
         if (this.toggleMinHeight > this.toggleMaxHeight) {
           if (this.showInsertWarnings) {
-            let errorMessage = "vue-extended-multiselect: «toggleMinHeight» property can not be greater than «toggleMaxHeight» property.";
-            errorMessage += "«toggleMaxHeight» property was reset to default value of 400 pixels.";
+            let errorMessage =
+              "vue-extended-multiselect: «toggleMinHeight» property can not be greater than «toggleMaxHeight» property.";
+            errorMessage +=
+              "«toggleMaxHeight» property was reset to default value of 400 pixels.";
             console.warn(errorMessage);
           }
 
@@ -575,7 +552,11 @@ export default Vue.extend({
      * @returns {boolean} reaching
      */
     maxOptionsWereSelected() {
-      return this.maxOptionsCount && this.multiple && this.selectedOptions.length === this.maxOptionsCount;
+      return (
+        this.maxOptionsCount &&
+        this.multiple &&
+        this.selectedOptions.length === this.maxOptionsCount
+      );
     },
 
     /**
@@ -584,7 +565,11 @@ export default Vue.extend({
      * @returns {boolean} reaching
      */
     minOptionsWereNotSelected() {
-      return this.minOptionsCount && this.multiple && this.selectedOptions.length < this.minOptionsCount;
+      return (
+        this.minOptionsCount &&
+        this.multiple &&
+        this.selectedOptions.length < this.minOptionsCount
+      );
     },
 
     /**
@@ -596,7 +581,9 @@ export default Vue.extend({
     optionHeightByProps() {
       const heightNumeric = typeof this.anyOptionWrapperBlockHeight === "number";
       let height = {
-        height: heightNumeric ? `${this.anyOptionWrapperBlockHeight}px` : `${this.anyOptionWrapperBlockHeight}`,
+        height: heightNumeric
+          ? `${this.anyOptionWrapperBlockHeight}px`
+          : `${this.anyOptionWrapperBlockHeight}`,
       };
 
       if (this.optionsPadding.length) {
@@ -625,24 +612,21 @@ export default Vue.extend({
     /**
      * Summarizes styles for options wrapper in combined collection
      * @method
-     * @returns {Array} styles 
+     * @returns {Array} styles
      */
     styles() {
       return [
-        this.heightFromProps, 
-        this.heightFromMounted, 
-        this.atopWithScroll, 
-        this.underWithScroll
+        this.heightFromProps,
+        this.heightFromMounted,
+        this.atopWithScroll,
+        this.underWithScroll,
       ];
     },
 
     /**
      * @see {@linkcode VuexGetters}
      */
-    ...mapGetters([
-      "searchValue",
-      "searchPattern"
-    ]),
+    ...mapGetters(["searchValue", "searchPattern"]),
   },
 });
 </script>

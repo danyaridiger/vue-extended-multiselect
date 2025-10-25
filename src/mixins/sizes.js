@@ -11,9 +11,9 @@ export default {
       type: String,
       required: true,
     },
-    
+
     /**
-     * Provides size to create special size-class 
+     * Provides size to create special size-class
      * for each kind of icon
      * @property {string} iconSize
      */
@@ -32,7 +32,7 @@ export default {
     iconSizeClass() {
       let basicIconSize = "extended__multiselect";
 
-      switch(this.$options._componentTag) {
+      switch (this.$options._componentTag) {
         case "extended-multiselect-loader":
           basicIconSize += "-loader_icon";
           break;
@@ -46,9 +46,7 @@ export default {
           basicIconSize += "-toggle_icon";
       }
 
-      switch(this.iconSize) {
-        case "large":
-          return `${basicIconSize}-large`;
+      switch (this.iconSize) {
         case "medium":
           return `${basicIconSize}-medium`;
         case "small":

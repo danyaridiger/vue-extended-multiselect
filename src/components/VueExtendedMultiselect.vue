@@ -53,15 +53,8 @@
           :external-options-loader="externalOptionsLoader"
           :input-id="inputId"
         >
-          <template
-            v-if="$scopedSlots.labelBlock"
-            #labelBlock="{ labelBlockValue }"
-          >
-            <slot
-              name="labelBlock"
-              :label-block-value="labelBlockValue"
-            >
-            </slot>
+          <template v-if="$scopedSlots.labelBlock" #labelBlock="{ labelBlockValue }">
+            <slot name="labelBlock" :label-block-value="labelBlockValue"></slot>
           </template>
           <template
             v-if="$scopedSlots.multipleBlocks"
@@ -78,7 +71,7 @@
             v-if="$scopedSlots.optionBlock"
             #optionBlock="{ label, deselectBlock, index }"
           >
-            <slot 
+            <slot
               name="optionBlock"
               :label="label"
               :index="index"
@@ -86,29 +79,19 @@
             >
             </slot>
           </template>
-          <template
-            v-if="$slots.maxElements"
-            #maxElements
-          >
+          <template v-if="$slots.maxElements" #maxElements>
             <slot name="maxElements"></slot>
           </template>
           <template
             v-if="$scopedSlots.showMore && toggleMultipleBlocksLimit"
             #showMore="{ showMoreOptions }"
           >
-            <slot 
-              name="showMore"
-              :show-more-options="showMoreOptions"
-            >
-            </slot>
+            <slot name="showMore" :show-more-options="showMoreOptions"></slot>
           </template>
         </extended-multiselect-input>
       </div>
       <div class="extended__multiselect-toggle_wrapper">
-        <slot 
-          name="toggle"
-          :toggle-options-list="toggleOptionsList"
-        >
+        <slot name="toggle" :toggle-options-list="toggleOptionsList">
           <extended-multiselect-toggle
             :tabindex="$attrs.tabindex"
             :disabled="disabled"
@@ -123,10 +106,7 @@
         </slot>
       </div>
       <div class="extended__multiselect-cancel_wrapper">
-        <slot
-          name="cancel"
-          :cancel="cancel"
-        >
+        <slot name="cancel" :cancel="cancel">
           <extended-multiselect-cancel
             v-if="showClearIcon"
             :tabindex="$attrs.tabindex"
@@ -142,10 +122,7 @@
         </slot>
       </div>
     </div>
-    <transition
-      name="extended-toggle"
-      type="transition"
-    >
+    <transition name="extended-toggle" type="transition">
       <extended-multiselect-options
         ref="extendedMultiselectOptions"
         v-if="dropdownActive"
@@ -183,61 +160,36 @@
         :create-custom-option-label="createCustomOptionLabel"
         :external-options-loader="externalOptionsLoader"
       >
-        <template
-          v-if="$slots.listHeader"
-          #listHeader
-        >
+        <template v-if="$slots.listHeader" #listHeader>
           <slot name="listHeader"></slot>
         </template>
-        <template
-          v-if="$slots.moreThanLimit && maxOptionsCount"
-          #moreThanLimit
-        >
+        <template v-if="$slots.moreThanLimit && maxOptionsCount" #moreThanLimit>
           <slot name="moreThanLimit"></slot>
         </template>
-        <template
-          v-if="$slots.lessThanLimit && minOptionsCount"
-          #lessThanLimit
-        >
+        <template v-if="$slots.lessThanLimit && minOptionsCount" #lessThanLimit>
           <slot name="lessThanLimit"></slot>
         </template>
         <template
           v-if="$scopedSlots.option"
           #option="{ option, createCustomOptionLabel }"
         >
-          <slot 
+          <slot
             name="option"
             :option="option"
             :create-custom-option-label="createCustomOptionLabel"
           >
           </slot>
         </template>
-        <template 
-          v-if="$slots.marker"
-          #marker="{ selected }"
-        >
-          <slot 
-            name="marker"
-            :selected="selected"
-          >
-          </slot>
+        <template v-if="$slots.marker" #marker="{ selected }">
+          <slot name="marker" :selected="selected"></slot>
         </template>
-        <template
-          v-if="$slots.noResults && noResultsBlockShown"
-          #noResults
-        >
+        <template v-if="$slots.noResults && noResultsBlockShown" #noResults>
           <slot name="noResults"></slot>
         </template>
-        <template
-          v-if="$slots.noOptions"
-          #noOptions
-        >
+        <template v-if="$slots.noOptions" #noOptions>
           <slot name="noOptions"></slot>
         </template>
-        <template
-          v-if="$slots.listFooter"
-          #listFooter
-        >
+        <template v-if="$slots.listFooter" #listFooter>
           <slot name="listFooter"></slot>
         </template>
       </extended-multiselect-options>
@@ -286,7 +238,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 0.5.9
+ * @version 1.0.0+fix.1
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
@@ -336,7 +288,7 @@ export default Vue.extend({
     },
 
     /**
-     * Allows user to create new options from search field 
+     * Allows user to create new options from search field
      * @default false
      * @property {boolean} createOnTheGo
      */
@@ -374,7 +326,7 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
-    
+
     /**
      * Switches options highlighting while hovering
      * @default true
@@ -414,7 +366,7 @@ export default Vue.extend({
       type: Boolean,
       default: true,
     },
-    
+
     /**
      * Determines whether to clear search field by selection/deselection of options
      * @default true
@@ -655,7 +607,7 @@ export default Vue.extend({
         return loaderThemeTypes.includes(value);
       },
     },
-    
+
     /**
      * Placeholder for search field to be used if
      * user is not allowed to create new options
@@ -679,7 +631,7 @@ export default Vue.extend({
     },
 
     /**
-     * Defines overall color theme for extended multiselect 
+     * Defines overall color theme for extended multiselect
      * @default "basic"
      * @property {string} themeType
      */
@@ -726,7 +678,7 @@ export default Vue.extend({
       type: Number,
       default: 5,
     },
-    
+
     /**
      * Maximal limit of selected options
      * @default null
@@ -813,9 +765,12 @@ export default Vue.extend({
       default: () => [],
       validator(value) {
         return value.every((option) => {
-          return typeof option === "string" || typeof option === "number" 
-           || typeof option === "boolean"
-           || typeof option === "function";
+          return (
+            typeof option === "string" ||
+            typeof option === "number" ||
+            typeof option === "boolean" ||
+            typeof option === "function"
+          );
         });
       },
     },
@@ -842,10 +797,12 @@ export default Vue.extend({
       type: Array,
       default: () => [],
       validator(value) {
-        return value.length < 5
-        && !value.some((padding) => {
-          return typeof padding !== "number";
-        });
+        return (
+          value.length < 5 &&
+          !value.some((padding) => {
+            return typeof padding !== "number";
+          })
+        );
       },
     },
 
@@ -892,11 +849,11 @@ export default Vue.extend({
      */
     createCustomOptionLabel: {
       type: Function,
-      default: (option) => null,
+      default: () => null,
     },
 
     /**
-     * Defines function that creates notification when maximal limit 
+     * Defines function that creates notification when maximal limit
      * of selected options has been reached
      * @default (number)=>string
      * @property {Function} multipleBlocksLimitMessage
@@ -964,10 +921,7 @@ export default Vue.extend({
       let theme;
       const localClassList = [];
 
-      switch(this.themeType) {
-        case "basic":
-          theme = "extended__multiselect";
-          break;
+      switch (this.themeType) {
         case "slate-grey":
           theme = "extended__multiselect-slate-grey";
           break;
@@ -980,18 +934,19 @@ export default Vue.extend({
         case "strict":
           theme = "extended__multiselect-strict";
           break;
-        default: theme = "extended__multiselect";
+        default:
+          theme = "extended__multiselect";
       }
 
       localClassList.push(theme);
 
-      const clear = this.showClearIcon 
-       ? "extended__multiselect-clear--active"
-       : "extended__multiselect-clear--locked";
+      const clear = this.showClearIcon
+        ? "extended__multiselect-clear--active"
+        : "extended__multiselect-clear--locked";
 
       localClassList.push(clear);
       localClassList.push("extended__multiselect-container");
-      
+
       return localClassList;
     },
 
@@ -1004,7 +959,10 @@ export default Vue.extend({
       if (!this.disabledPrimitiveOptions) return null;
 
       return this.disabledPrimitiveOptions.map((disabledOption) => {
-        if (Array.isArray(disabledOption) || typeof disabledOption === "object") {
+        if (
+          disabledOption &&
+          (Array.isArray(disabledOption) || typeof disabledOption === "object")
+        ) {
           return null;
         }
 
@@ -1018,7 +976,7 @@ export default Vue.extend({
      * @returns {Object|null} styles
      */
     displayWrongValue() {
-      return this.wrongCurrentValue ? { borderColor: this.errorBorderColor } : null; 
+      return this.wrongCurrentValue ? { borderColor: this.errorBorderColor } : null;
     },
 
     /**
@@ -1031,12 +989,12 @@ export default Vue.extend({
 
       if (this.chosenToggleAppearanceSide === "atop") {
         borderStyles = {
-          borderTopLeftRadius: 0, 
+          borderTopLeftRadius: 0,
           borderTopRightRadius: 0,
         };
       } else {
         borderStyles = {
-          borderBottomLeftRadius: 0, 
+          borderBottomLeftRadius: 0,
           borderBottomRightRadius: 0,
         };
       }
@@ -1074,8 +1032,8 @@ export default Vue.extend({
       if (!this.rawOptions) return;
 
       return this.optionsCountRestriction
-       ? this.rawOptions.filter((_, index) => index + 1 <= this.optionsCountRestriction)
-       : this.rawOptions;
+        ? this.rawOptions.filter((_, index) => index + 1 <= this.optionsCountRestriction)
+        : this.rawOptions;
     },
 
     /**
@@ -1086,7 +1044,7 @@ export default Vue.extend({
     roledescription() {
       return this.multiple ? "Multiselect" : "Select";
     },
-    
+
     /**
      * Defines "tabindex" attribute of extended multiselect wrapper if needed
      * @method
@@ -1104,15 +1062,13 @@ export default Vue.extend({
      */
     wrapperClasses() {
       return this.disabled && !this.internalLoading
-       ? "extended__multiselect-wrapper--disabled"
-       : "extended__multiselect-wrapper";
+        ? "extended__multiselect-wrapper--disabled"
+        : "extended__multiselect-wrapper";
     },
   },
 });
 </script>
 
 <style>
-
 @import "../styles/main.css";
-
 </style>

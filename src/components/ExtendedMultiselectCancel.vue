@@ -116,12 +116,11 @@ export default Vue.extend({
      * @returns {string} class
      */
     classes() {
-      return (this.loading || this.disabled)
-       ? "extended__multiselect-cancel--disabled"
-       : "extended__multiselect-cancel";
+      return this.loading || this.disabled
+        ? "extended__multiselect-cancel--disabled"
+        : "extended__multiselect-cancel";
     },
 
-    
     /**
      * Sets "tabindex" attibute of clear button based on
      * given tabindex

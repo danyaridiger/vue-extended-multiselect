@@ -27,6 +27,7 @@ export const NO_OPTIONS_PATTERN = /No options/i;
 export const FIRST_OPTION_PATTERN = /F/i;
 
 const localVue = createLocalVue();
+
 localVue.use(Vuex);
 
 export const localVueConstructor = localVue;

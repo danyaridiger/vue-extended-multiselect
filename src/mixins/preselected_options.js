@@ -17,9 +17,10 @@ export default {
         if (Array.isArray(option) && option.length > 0) {
           label = option.join(", ");
         } else {
-          label = typeof option[this.label] === "object" 
-           ? JSON.stringify(option[this.label]) 
-           : option[this.label];
+          label =
+            option[this.label] && typeof option[this.label] === "object"
+              ? JSON.stringify(option[this.label])
+              : option[this.label];
         }
 
         if (Object.keys(option).length === 0) {
@@ -41,10 +42,10 @@ export default {
     optionTypeRestrictor(option) {
       if (!option) return false;
 
-      const isObjectArrayInstance = Object.getPrototypeOf(option).constructor.name 
-       !== "Object"
-       && Object.getPrototypeOf(option).constructor.name !== "Array";
-      const isAnyInstance = typeof option === "object" && isObjectArrayInstance;
+      const isObjectArrayInstance =
+        Object.getPrototypeOf(option).constructor.name !== "Object" &&
+        Object.getPrototypeOf(option).constructor.name !== "Array";
+      const isAnyInstance = option && typeof option === "object" && isObjectArrayInstance;
       const isSymbol = typeof option === "symbol";
 
       if (isSymbol && this.showInsertWarnings) {
@@ -52,12 +53,14 @@ export default {
       }
 
       if (isAnyInstance && this.showInsertWarnings) {
-        console.warn("vue-extended-multiselect: option can not be an instance of any constructor function");
+        console.warn(
+          "vue-extended-multiselect: option can not be an instance of any constructor function",
+        );
       }
 
       if (isSymbol || isAnyInstance) return false;
 
       return true;
     },
-  }
+  },
 };
