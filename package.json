@@ -1,6 +1,6 @@
 {
   "name": "vue-extended-multiselect",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Extended multiselect dropdown component for Vue 2 with search, tagging, async options and flexible customization.",
   "keywords": [
     "multiselect",
@@ -14,7 +14,8 @@
   ],
   "files": [
     "./src/*",
-    "index.js"
+    "index.js",
+    "./types/*"
   ],
   "typings": "./types/index.d.ts",
   "types": "./types/index.d.ts",

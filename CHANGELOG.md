@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **0.5.10**
+Current vue-extended-multiselect version: **1.0.2**
 
 ---
 
@@ -181,3 +181,7 @@ Current vue-extended-multiselect version: **0.5.10**
 ### 1.0.1 (2025-10-25)
 
 - Fixed output files configuration in package.json file.
+
+### 1.0.2 (2025-10-26)
+
+- Added types to output files configuration in package.json file.
