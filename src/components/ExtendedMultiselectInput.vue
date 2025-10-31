@@ -390,7 +390,7 @@ export default Vue.extend({
      * @property {Function} createCustomOptionLabel
      */
     createCustomOptionLabel: {
-      type: Function,
+      type: [Function, null],
       required: true,
     },
 
@@ -401,7 +401,7 @@ export default Vue.extend({
      * @param {string} value - value of search field
      */
     externalOptionsLoader: {
-      type: Function,
+      type: [Function, null],
       default: null,
     },
 

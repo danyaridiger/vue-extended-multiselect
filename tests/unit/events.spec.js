@@ -1,10 +1,10 @@
 import { fireEvent } from "@testing-library/dom";
-import { mountComponent, localVueConstructor } from "../utils/mount";
+import { mountComponent, localVueConstructor } from "../tools/mount.tool";
 import {
   mockOptionSelection,
   mockOptionsLoader,
   createNewOptionsWrapper,
-} from "../utils/utils";
+} from "../tools/utils.tool";
 
 import store from "../../src/vuex/store";
 

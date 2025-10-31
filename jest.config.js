@@ -1,13 +1,18 @@
 module.exports = {
   preset: "@vue/cli-plugin-unit-jest",
-  collectCoverageFrom: ["src/**/*.{js}", "!src/**/*.test.{js}", "!src/**/index.js"],
+  collectCoverageFrom: [
+    "src/**/*.{js}",
+    "src/**/index.js",
+    "!src/**/*.test.{js}",
+    "!src/**/*.tool.{js}",
+  ],
   expand: true,
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 85,
-      lines: 85,
-      statements: 85,
+      branches: 90,
+      functions: 95,
+      lines: 95,
+      statements: 95,
     },
   },
   displayName: {
@@ -32,20 +37,20 @@ module.exports = {
   injectGlobals: true,
   moduleFileExtensions: ["js", "ts", "json", "mjs", "node", "vue"],
   moduleNameMapper: {
-    "\\.svg$": "<rootDir>/tests/utils/stubs",
+    "\\.svg$": "<rootDir>/tests/tools/stubs.tool",
     "\\.scss$": "identity-obj-proxy",
   },
   modulePathIgnorePatterns: ["<rootDir>/assets"],
   resetModules: true,
   resetMocks: true,
   rootDir: "./",
-  setupFiles: ["<rootDir>/tests/utils/mocks.js"],
+  setupFiles: ["<rootDir>/tests/tools/mocks.tool.js"],
   slowTestThreshold: 20,
   testEnvironment: "jsdom",
   testLocationInResults: true,
   testMatch: ["**/tests/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[tj]s?(x)"],
-  testPathIgnorePatterns: ["tests/utils"],
-  transformIgnorePatterns: ["<rootDir>/node_modules/"],
+  testPathIgnorePatterns: ["tests/tools/*"],
+  transformIgnorePatterns: ["<rootDir>/node_modules/*"],
   timers: "real",
   transform: {
     "^.+\\.vue$": "@vue/vue2-jest",

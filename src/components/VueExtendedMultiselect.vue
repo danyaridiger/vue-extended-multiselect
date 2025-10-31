@@ -238,7 +238,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 1.0.2
+ * @version 1.0.3
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
@@ -848,7 +848,7 @@ export default Vue.extend({
      * @property {Function} createCustomOptionLabel
      */
     createCustomOptionLabel: {
-      type: Function,
+      type: [Function, null],
       default: () => null,
     },
 

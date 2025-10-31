@@ -5,12 +5,12 @@ import {
   wrapperSlots,
   NO_OPTIONS_PATTERN,
   FIRST_OPTION_PATTERN,
-} from "../utils/mount";
+} from "../tools/mount.tool";
 import {
   mockOptionSelection,
   expandOptionsList,
   createNewOptionsWrapper,
-} from "../utils/utils";
+} from "../tools/utils.tool";
 
 import store from "../../src/vuex/store";
 

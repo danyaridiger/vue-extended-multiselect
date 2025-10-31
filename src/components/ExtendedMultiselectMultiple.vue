@@ -214,7 +214,7 @@ export default Vue.extend({
      * @property {Function} createCustomOptionLabel
      */
     createCustomOptionLabel: {
-      type: Function,
+      type: [Function, null],
       required: true,
     },
 

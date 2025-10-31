@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **1.0.2**
+Current vue-extended-multiselect version: **1.0.3**
 
 ---
 
@@ -185,3 +185,9 @@ Current vue-extended-multiselect version: **1.0.2**
 ### 1.0.2 (2025-10-26)
 
 - Added types to output files configuration in package.json file.
+
+### 1.0.3 (2025-10-31)
+
+- Changed coverage paths in jest configuration file.
+- Renamed unit-tests helper directory from "utils" to "tools".
+- Renamed unit-tests tools with addition of the "tool" postfix.
