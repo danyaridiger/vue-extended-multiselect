@@ -20,7 +20,7 @@
     "eslint:recommended",
     "plugin:jest/recommended",
     "prettier",
-    "plugin:vue/recommended"
+    "plugin:vue/vue3-essential"
   ],
   "rules": {
     "no-undef": "warn",
@@ -34,8 +34,8 @@
     "vue/script-setup-uses-vars": "error",
     "vue/no-multiple-template-root": "off",
     "vue/max-attributes-per-line": "off",
-    "vue/singleline-html-element-content-newline": "off",
     "vue/no-deprecated-dollar-scopedslots-api": "off",
+    "vue/singleline-html-element-content-newline": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-unsafe-function-type": "warn"
   },
@@ -46,9 +46,6 @@
       "extends": ["plugin:@typescript-eslint/recommended", "prettier"]
     },
     {
-      "files": ["**/*.js"]
-    },
-    {
       "files": ["*.vue"],
       "parser": "vue-eslint-parser",
       "parserOptions": {
@@ -57,9 +54,6 @@
           "ts": "@typescript-eslint/parser"
         },
         "extraFileExtensions": [".vue"]
-      },
-      "rules": {
-        "no-undef": "off"
       }
     },
     {

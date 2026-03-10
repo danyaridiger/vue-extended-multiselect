@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **1.0.3**
+Current vue-extended-multiselect version: **1.0.4**
 
 ---
 
@@ -191,3 +191,7 @@ Current vue-extended-multiselect version: **1.0.3**
 - Changed coverage paths in jest configuration file.
 - Renamed unit-tests helper directory from "utils" to "tools".
 - Renamed unit-tests tools with addition of the "tool" postfix.
+
+### 1.0.4 (2026-03-10)
+
+- Added some new rules overrides for Vue templates in .eslintrc.json file.
