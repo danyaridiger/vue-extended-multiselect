@@ -1,6 +1,6 @@
 # Patch notes
 
-Current vue-extended-multiselect version: **1.0.4**
+Current vue-extended-multiselect version: **1.0.5**
 
 ---
 
@@ -195,3 +195,10 @@ Current vue-extended-multiselect version: **1.0.4**
 ### 1.0.4 (2026-03-10)
 
 - Added some new rules overrides for Vue templates in .eslintrc.json file.
+
+### 1.0.5 (2026-04-06)
+
+- Changed "iconFilter" prop settings in "sizes" mixin.
+- Fixed a bug with incorrect dynamic svg-filter with color settings for loader icon.
+- Removed "loaderIconFilter" prop from all child components.
+- Removed "iconFilter" prop from some child components.

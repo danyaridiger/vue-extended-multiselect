@@ -47,6 +47,8 @@ import Vue from "vue";
 
 import sizes from "../mixins/sizes";
 
+import { mapGetters } from "vuex";
+
 /**
  * @mixes SizesMixin
  */
@@ -54,10 +56,6 @@ export default Vue.extend({
   name: "ExtendedMultiselectLoader",
 
   mixins: [sizes],
-
-  inject: {
-    loaderIconFilter: ["loaderIconFilter"],
-  },
 
   computed: {
     /**
@@ -86,11 +84,16 @@ export default Vue.extend({
           basicFilter = `${basicFilter}_strict`;
           break;
         default:
-          basicFilter = `${basicFilter}_default-loader`;
+          basicFilter = `${basicFilter}_loader-default`;
       }
 
       return basicFilter;
     },
+
+    /**
+     * @see {@linkcode VuexGetters}
+     */
+    ...mapGetters(["loaderIconFilter"]),
   },
 });
 </script>

@@ -650,8 +650,14 @@ describe("props", () => {
     const loaderWrapper = wrapper.findComponent(ExtendedMultiselectLoader).find("img");
 
     expect(loaderWrapper.classes()).toContain(
-      "extended__multiselect-loader_default-loader",
+      "extended__multiselect-loader_loader-default",
     );
+
+    await wrapper.setProps({
+      loaderIconFilter: "teal",
+    });
+
+    expect(loaderWrapper.classes()).toContain("extended__multiselect-loader_teal");
   });
 
   it("correctly handles 'placeholder' prop value", async () => {

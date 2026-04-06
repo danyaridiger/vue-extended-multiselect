@@ -1,3 +1,5 @@
+import { mapActions } from "vuex";
+
 import localEmitter from "../tools/events.js";
 
 const togglePattern = /^extended__multiselect-toggle_wrapper/i;
@@ -555,6 +557,11 @@ export default {
         this.$emit("input", this.selectedOptions[0]);
       }
     },
+
+    /**
+     * @see {@linkcode VuexActions}
+     */
+    ...mapActions(["setLoaderIconFilter"]),
   },
 
   watch: {
@@ -586,6 +593,17 @@ export default {
 
         this.setPreselectedOptionsByModelValue(true);
       },
+    },
+
+    /**
+     * Changes svg-filter with color settings for loader icon
+     * @method
+     */
+    loaderIconFilter: {
+      handler(value) {
+        this.setLoaderIconFilter(value);
+      },
+      immediate: true,
     },
   },
 

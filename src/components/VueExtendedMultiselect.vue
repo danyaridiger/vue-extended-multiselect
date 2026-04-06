@@ -31,7 +31,6 @@
           :create-on-the-go="createOnTheGo"
           :disabled="disabled"
           :loading="internalLoading"
-          :loader-icon-filter="loaderIconFilter"
           :multiple="multiple"
           :search-filter-active="searchFilterActive"
           :show-deselect-icon-loader="showDeselectIconLoader"
@@ -98,7 +97,6 @@
             :dropdown-active="dropdownActive"
             :loading="internalLoading"
             :icon-filter="iconFilter"
-            :loader-icon-filter="loaderIconFilter"
             :icon-size="iconSize"
             :toggle-icon="toggleIcon"
             :emitter="emitter"
@@ -114,7 +112,6 @@
             :show-search-field="showSearchField"
             :loading="internalLoading"
             :icon-filter="iconFilter"
-            :loader-icon-filter="loaderIconFilter"
             :icon-size="iconSize"
             :selected-options="selectedOptions"
             :emitter="emitter"
@@ -238,7 +235,7 @@ import store from "../vuex/store";
  * @mixes ToggleMixin
  * @mixes CancelMixin
  * @mixes PreselectedOptionsMixin
- * @version 1.0.4
+ * @version 1.0.5
  */
 export default Vue.extend({
   name: "VueExtendedMultiselect",
@@ -891,12 +888,6 @@ export default Vue.extend({
       type: UnionPropType,
       default: null,
     },
-  },
-
-  provide() {
-    return {
-      loaderIconFilter: this.loaderIconFilter,
-    };
   },
 
   data() {

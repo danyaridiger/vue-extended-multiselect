@@ -10,11 +10,7 @@
     @keypress.stop="toggleOptionsList($event)"
   >
     <img alt="" v-if="!loading" :class="classesSummary" :src="icon" />
-    <extended-multiselect-loader
-      v-else
-      :icon-filter="loaderIconFilter"
-      :icon-size="iconSize"
-    />
+    <extended-multiselect-loader v-else :icon-size="iconSize" />
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -78,24 +74,6 @@ export default Vue.extend({
      */
     dropdownActive: {
       type: Boolean,
-      required: true,
-    },
-
-    /**
-     * Defines a svg-filter for icons
-     * @property {string} iconFilter
-     */
-    iconFilter: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * Defines a svg-filter for loader icons
-     * @property {string} loaderIconFilter
-     */
-    loaderIconFilter: {
-      type: String,
       required: true,
     },
 

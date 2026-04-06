@@ -13,11 +13,7 @@
       :class="iconSizeClass"
       :src="require('../assets/cancel.svg')"
     />
-    <extended-multiselect-loader
-      v-else
-      :icon-filter="loaderIconFilter"
-      :icon-size="iconSize"
-    />
+    <extended-multiselect-loader v-else :icon-size="iconSize" />
   </div>
 </template>
 
@@ -49,15 +45,6 @@ export default Vue.extend({
      */
     disabled: {
       type: Boolean,
-      required: true,
-    },
-
-    /**
-     * Defines a svg-filter for loader icons
-     * @property {string} loaderIconFilter
-     */
-    loaderIconFilter: {
-      type: String,
       required: true,
     },
 

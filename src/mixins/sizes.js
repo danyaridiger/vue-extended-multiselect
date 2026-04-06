@@ -1,3 +1,5 @@
+import { iconFilters } from "../sets/sets";
+
 /**
  * @mixin SizesMixin
  */
@@ -5,11 +7,15 @@ export default {
   props: {
     /**
      * Defines a svg-filter for icons
+     * @default "basic"
      * @property {string} iconFilter
      */
     iconFilter: {
       type: String,
-      required: true,
+      default: "basic",
+      validator(value) {
+        return iconFilters.includes(value);
+      },
     },
 
     /**

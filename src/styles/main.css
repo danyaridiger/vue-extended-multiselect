@@ -303,7 +303,7 @@
   filter: url(#greenFilter);
 }
 
-.extended__multiselect-loader_default-loader {
+.extended__multiselect-loader_loader-default {
   filter: url(#filterLoaderDefault);
 }
 

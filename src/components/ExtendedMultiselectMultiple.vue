@@ -25,11 +25,7 @@
                   v-if="!showLoaderIcon"
                   :src="require('../assets/cancel.svg')"
                 />
-                <extended-multiselect-loader
-                  v-else
-                  :icon-filter="iconFilter"
-                  icon-size="deselect"
-                />
+                <extended-multiselect-loader v-else icon-size="deselect" />
               </div>
             </div>
           </slot>
@@ -140,15 +136,6 @@ export default Vue.extend({
      * @property {string} emptyObjectsPlaceholder
      */
     emptyObjectsPlaceholder: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * Defines a svg-filter for icons
-     * @property {string} iconFilter
-     */
-    iconFilter: {
       type: String,
       required: true,
     },
